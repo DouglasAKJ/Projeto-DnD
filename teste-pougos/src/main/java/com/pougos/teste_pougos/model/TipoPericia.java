@@ -1,0 +1,22 @@
+package com.pougos.teste_pougos.model;
+
+public enum TipoPericia {
+    ACROBACIA,
+    ARCANISMO,
+    ATLETISMO,
+    ATUACAO,
+    ENGANACAO,
+    FURTIVIDADE,
+    HISTORIA,
+    INTIMIDACAO,
+    INTUICAO,
+    INVESTIGACAO,
+    LIDAR_COM_ANIMAIS,
+    MEDICINA,
+    NATUREZA,
+    PERCEPCAO,
+    PERSUASAO,
+    PRESTIDIGITACAO,
+    RELIGIAO,
+    SOBREVIVENCIA
+}

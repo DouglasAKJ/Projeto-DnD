@@ -1,0 +1,40 @@
+package com.pougos.teste_pougos.dto;
+
+import com.pougos.teste_pougos.model.Ficha;
+import com.pougos.teste_pougos.repository.FichaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class FichaService {
+
+    private final FichaRepository fichaRepository;
+
+    public FichaService(FichaRepository fichaRepository) {
+        this.fichaRepository = fichaRepository;
+    }
+
+    public Ficha criaFicha(Ficha ficha){
+        return fichaRepository.save(ficha);
+    }
+
+    public List<Ficha> retornaFicha(){
+        return fichaRepository.findAll();
+    }
+
+    public void deletarFichas(){
+        List<Ficha> lista = retornaFicha();
+        for(Ficha ficha : lista){
+            fichaRepository.delete(ficha);
+        }
+
+    }
+
+    public Ficha buscaPorId(Long id){
+        return fichaRepository.getReferenceById(id);
+    }
+
+}
+
