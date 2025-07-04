@@ -1,0 +1,77 @@
+.linha {
+    display: flex;
+    flex-direction: row;
+}
+
+.linha2 {
+    display: flex;
+    flex-direction: row;
+    margin-left: 3px;
+}
+
+
+.coluna {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.borda {
+    border: 1px solid red ;
+}
+
+.input {
+    width: 50px;
+    
+}
+
+.inputAtributo {
+    width: 50px;
+    
+}
+
+.centralizar {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.centralizar2 {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stretch {
+    align-items: stretch;
+}
+
+.input-grande {
+    font-size: 40px
+}
+
+#nav-ataque2{
+    display: initial;
+}
+
+#nav-spells {
+    display: none;
+}
+
+#nav-inventario {
+    display: none;
+}
+
+#spell-name{
+    width: 80px;
+}
+
+#spell-time{
+    width: 80px;
+}
+
+#spell-range{
+    width: 40px;
+}
+
