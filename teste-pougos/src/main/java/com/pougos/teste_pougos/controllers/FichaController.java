@@ -3,12 +3,14 @@ package com.pougos.teste_pougos.controllers;
 import com.pougos.teste_pougos.dto.AtributoRequest;
 import com.pougos.teste_pougos.dto.FichaService;
 import com.pougos.teste_pougos.dto.NivelRequest;
+import com.pougos.teste_pougos.helper.NullCopyProperties;
 import com.pougos.teste_pougos.model.Ficha;
 import com.pougos.teste_pougos.model.TipoAtributo;
 import com.pougos.teste_pougos.repository.FichaRepository;
 import org.apache.coyote.Request;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 @CrossOrigin(origins = "http://127.0.0.1:5500")
@@ -16,9 +18,11 @@ import java.util.List;
 @RequestMapping("/ficha")
 public class FichaController {
     private final FichaService fichaService;
+    private final NullCopyProperties beanUtilsBean;
 
-    public FichaController(FichaService fichaService) {
+    public FichaController(FichaService fichaService, NullCopyProperties beanUtilsBean) {
         this.fichaService = fichaService;
+        this.beanUtilsBean = beanUtilsBean;
     }
 
     @GetMapping
@@ -42,10 +46,13 @@ public class FichaController {
         fichaService.deletarFichas();
     }
 
-    @PostMapping("/altera-valor"){
-        public void alteraValor(){
+    @PatchMapping("/alteraFicha/{id}")
+    public void alteraValor(@RequestBody Ficha ficha,@PathVariable("id") Long id) throws InvocationTargetException, IllegalAccessException {
+        Ficha fichaAtual = fichaService.buscaPorId(id);
 
-        }
+        beanUtilsBean.copyProperties(fichaAtual, ficha);
+        fichaService.criaFicha(fichaAtual);
+
     }
 
 

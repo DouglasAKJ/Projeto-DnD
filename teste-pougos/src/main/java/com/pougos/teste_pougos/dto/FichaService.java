@@ -2,7 +2,9 @@ package com.pougos.teste_pougos.dto;
 
 import com.pougos.teste_pougos.model.Ficha;
 import com.pougos.teste_pougos.repository.FichaRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,8 +14,10 @@ public class FichaService {
 
     private final FichaRepository fichaRepository;
 
+
     public FichaService(FichaRepository fichaRepository) {
         this.fichaRepository = fichaRepository;
+
     }
 
     public Ficha criaFicha(Ficha ficha){
@@ -28,6 +32,7 @@ public class FichaService {
         List<Ficha> lista = retornaFicha();
         for(Ficha ficha : lista){
             fichaRepository.delete(ficha);
+
         }
 
     }
@@ -35,6 +40,7 @@ public class FichaService {
     public Ficha buscaPorId(Long id){
         return fichaRepository.getReferenceById(id);
     }
+
 
 }
 
