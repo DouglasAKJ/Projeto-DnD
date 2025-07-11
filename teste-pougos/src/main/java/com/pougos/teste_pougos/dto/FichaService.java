@@ -6,6 +6,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class FichaService {
         this.fichaRepository = fichaRepository;
 
     }
-
+    @Transactional
     public Ficha criaFicha(Ficha ficha){
         return fichaRepository.save(ficha);
     }
@@ -38,7 +39,7 @@ public class FichaService {
     }
 
     public Ficha buscaPorId(Long id){
-        return fichaRepository.getReferenceById(id);
+        return fichaRepository.findById(id).orElseThrow(() -> new RuntimeException("ID não encontrado"));
     }
 
 

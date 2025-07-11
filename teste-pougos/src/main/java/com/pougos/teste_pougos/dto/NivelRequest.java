@@ -1,13 +1,13 @@
 package com.pougos.teste_pougos.dto;
 
 public class NivelRequest {
-    private int nivel;
+    private int level;
 
     public int getNivel(){
-        return nivel;
+        return level;
     }
 
     public void setNivel(int nivel){
-        this.nivel = nivel;
+        this.level = nivel;
     }
 }

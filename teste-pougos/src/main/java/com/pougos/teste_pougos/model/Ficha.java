@@ -1,7 +1,9 @@
 package com.pougos.teste_pougos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 @Entity
@@ -18,8 +20,10 @@ public class Ficha {
     private String raca;
     @Column(nullable = true)
     private int proficiencia;
+    @Embedded
     private Atributos atributos;
-    private Pericia pericias;
+    @OneToMany(mappedBy = "ficha", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Pericia> pericias = new ArrayList<>();
     @Column(nullable = true)
     private int classeArmadura;
     @Column(nullable = true)
@@ -31,12 +35,52 @@ public class Ficha {
     @Column(nullable = true)
     private int vidaTemp;
 
+    @ManyToOne
+    private Usuario usuario;
 
+    public Ficha() {
+    }
 
-    public Ficha(){
+    public Ficha(Usuario usuario){
+
         this.atributos = new Atributos();
-        this.pericias = new Pericia();
-        this.iniciativa = atributos.getModificador(TipoAtributo.DESTREZA);
+        this.usuario = usuario;
+        this.pericias.add(new Pericia("Acrobacia", TipoAtributo.INTELIGENCIA, this));
+        this.pericias.add(new Pericia("Arcanismo", TipoAtributo.INTELIGENCIA, this));
+        this.pericias.add(new Pericia("Atletismo", TipoAtributo.FORCA, this));
+        this.pericias.add(new Pericia("Atuação", TipoAtributo.CARISMA, this));
+        this.pericias.add(new Pericia("Enganação", TipoAtributo.CARISMA, this));
+        this.pericias.add(new Pericia("Furtividade", TipoAtributo.DESTREZA, this));
+        this.pericias.add(new Pericia("História", TipoAtributo.INTELIGENCIA, this));
+        this.pericias.add(new Pericia("Intimidação", TipoAtributo.CARISMA, this));
+        this.pericias.add(new Pericia("Intuição", TipoAtributo.SABEDORIA, this));
+        this.pericias.add(new Pericia("Investigação", TipoAtributo.INTELIGENCIA, this));
+        this.pericias.add(new Pericia("Lidar com Animais", TipoAtributo.SABEDORIA, this));
+        this.pericias.add(new Pericia("Medicina", TipoAtributo.SABEDORIA, this));
+        this.pericias.add(new Pericia("Natureza", TipoAtributo.INTELIGENCIA, this));
+        this.pericias.add(new Pericia("Percepção", TipoAtributo.SABEDORIA, this));
+        this.pericias.add(new Pericia("Persuasão", TipoAtributo.CARISMA, this));
+        this.pericias.add(new Pericia("Prestidigição", TipoAtributo.DESTREZA, this));
+        this.pericias.add(new Pericia("Religião", TipoAtributo.INTELIGENCIA, this));
+        this.pericias.add(new Pericia("Sobrevivência", TipoAtributo.SABEDORIA, this));
+
+
+    }
+
+    public List<Pericia> getPericias() {
+        return pericias;
+    }
+
+    public void setPericias(List<Pericia> pericias) {
+        this.pericias = pericias;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Long getId() {
@@ -96,7 +140,7 @@ public class Ficha {
     }
 
     public int getLevel() {
-        return defProficiencia(level);
+        return level;
     }
 
     public void setLevel(int level) {
@@ -136,16 +180,9 @@ public class Ficha {
     }
 
 
-    public Pericia getPericias() {
-        return pericias;
-    }
-
-    public void setPericias(Pericia pericias){
-        this.pericias = pericias;
-    }
-
     public void setValorAtributo(TipoAtributo tipo, int valor){
         atributos.setValor(tipo, valor);
+        atributos.setValorModificador(tipo, atributos.getModificador(tipo));
 
     }
 

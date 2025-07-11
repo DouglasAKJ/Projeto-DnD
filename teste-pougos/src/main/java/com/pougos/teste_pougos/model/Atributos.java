@@ -6,12 +6,13 @@ import jakarta.persistence.*;
 import java.util.EnumMap;
 @Embeddable
 public class Atributos {
-    private int destreza = 10;
-    private int forca = 10;
-    private int inteligencia = 10;
-    private int constituicao = 10;
-    private int carisma = 10;
-    private int sabedoria = 10;
+
+    private Integer destreza = 10;
+    private Integer forca = 10;
+    private Integer inteligencia = 10;
+    private Integer constituicao = 10;
+    private Integer carisma = 10;
+    private Integer sabedoria = 10;
 
     private int destrezaMod = 0;
     private int forcaMod = 0;
@@ -27,48 +28,50 @@ public class Atributos {
         return destrezaMod;
     }
 
-    public void setDestrezaMod(int destrezaMod) {
-        this.destrezaMod = destrezaMod;
+    public void setDestrezaMod() {
+        this.destrezaMod = (getDestreza() - 10) / 2;
     }
+
+
 
     public int getForcaMod() {
         return forcaMod;
     }
 
-    public void setForcaMod(int forcaMod) {
-        this.forcaMod = forcaMod;
+    public void setForcaMod() {
+        this.forcaMod = (getForca() - 10) / 2;
     }
 
     public int getInteligenciaMod() {
         return inteligenciaMod;
     }
 
-    public void setInteligenciaMod(int inteligenciaMod) {
-        this.inteligenciaMod = inteligenciaMod;
+    public void setInteligenciaMod() {
+        this.inteligenciaMod = (getInteligencia() - 10) / 2;
     }
 
     public int getConstituicaoMod() {
         return constituicaoMod;
     }
 
-    public void setConstituicaoMod(int constituicaoMod) {
-        this.constituicaoMod = constituicaoMod;
+    public void setConstituicaoMod() {
+        this.constituicaoMod = (getConstituicao() - 10) / 2;
     }
 
     public int getCarismaMod() {
         return carismaMod;
     }
 
-    public void setCarismaMod(int carismaMod) {
-        this.carismaMod = carismaMod;
+    public void setCarismaMod() {
+        this.carismaMod = (getCarisma() - 10) / 2;
     }
 
     public int getSabedoriaMod() {
         return sabedoriaMod;
     }
 
-    public void setSabedoriaMod(int sabedoriaMod) {
-        this.sabedoriaMod = sabedoriaMod;
+    public void setSabedoriaMod() {
+        this.sabedoriaMod = (getSabedoria() - 10) / 2;
     }
 
     public int getDestreza() {
@@ -77,14 +80,18 @@ public class Atributos {
 
     public void setDestreza(int destreza) {
         this.destreza = destreza;
+
+        setDestrezaMod();
     }
 
     public int getForca() {
+
         return forca;
     }
 
     public void setForca(int forca) {
         this.forca = forca;
+        setForcaMod();
     }
 
     public int getInteligencia() {
@@ -93,14 +100,17 @@ public class Atributos {
 
     public void setInteligencia(int inteligencia) {
         this.inteligencia = inteligencia;
+        setInteligenciaMod();
     }
 
     public int getConstituicao() {
+
         return constituicao;
     }
 
     public void setConstituicao(int constituicao) {
         this.constituicao = constituicao;
+        setConstituicaoMod();
     }
 
     public int getCarisma() {
@@ -109,6 +119,7 @@ public class Atributos {
 
     public void setCarisma(int carisma) {
         this.carisma = carisma;
+        setCarismaMod();
     }
 
     public int getSabedoria() {
@@ -116,7 +127,9 @@ public class Atributos {
     }
 
     public void setSabedoria(int sabedoria) {
+
         this.sabedoria = sabedoria;
+        setSabedoriaMod();
     }
 
     public int getValor(TipoAtributo tipo){
@@ -141,9 +154,23 @@ public class Atributos {
         }
     }
 
-    public int getModificador(TipoAtributo tipo){
-        return (getValor(tipo) - 10) / 2;
+    public void setValorModificador(TipoAtributo tipo, int valor){
+        switch (tipo){
+            case FORCA -> forca = valor;
+            case CARISMA -> carisma = valor;
+            case DESTREZA -> destreza = valor;
+            case SABEDORIA -> sabedoria = valor;
+            case CONSTITUICAO -> constituicao = valor;
+            case INTELIGENCIA -> inteligencia = valor;
+        }
     }
+
+
+    public int getModificador(TipoAtributo tipo){
+        int valor = getValor(tipo);
+        return (valor - 10) / 2;
+    }
+
 
     //
 //    private Long id;

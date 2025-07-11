@@ -1,3 +1,9 @@
+//token
+const token = sessionStorage.getItem("auth-token")
+
+//id
+const id = sessionStorage.getItem("id-ficha")
+
 //misc
 const botao = document.getElementById("botao");
 const content = document.getElementById("content");
@@ -5,6 +11,10 @@ const body = document.getElementsByTagName("body");
 
 //inputs
 const inputAtributo = document.getElementsByName("atributo");
+const nomeChar = document.getElementById("nomeChar")
+const classe = document.getElementById("classe")
+const classeArmadura = document.getElementById("ca")
+const deslocamento = document.getElementById("deslocamento")
 
 //botoes
 const botaoCombat = document.getElementById("combat-btn");
@@ -75,7 +85,18 @@ const prestidigitacao = document.getElementById("prestidigitacao");
 const religiao = document.getElementById("religiao");
 const sobrevivencia = document.getElementById("sobrevivencia");
 
+//salva guardas
 
+const forcaSave = document.getElementById("forcaSave");
+const consSave = document.getElementById("consSave");
+const dexSave = document.getElementById("dexSave");
+const intSave = document.getElementById("intSave");
+const sabSave = document.getElementById("sabSave");
+const carismaSave = document.getElementById("carismaSave");
+
+//hp
+const hpAtual = document.getElementById("hpAtual") 
+const hpMax = document.getElementById("hpMax")
 
   addBotao.addEventListener("click", () => {
     const newAtk = document.createElement("div");
@@ -211,22 +232,93 @@ const sobrevivencia = document.getElementById("sobrevivencia");
     navInv.style.display = "flex";
   })
 
-
-
-nivel.addEventListener("change", function(){
-  fetch("http://localhost:8080/ficha",
+classe.addEventListener("change", async function(){
+  fetch(`http://localhost:8080/ficha/${id}`,
     {
-      headers: {
+      headers:
+      {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
     method: "POST",
     body: JSON.stringify({
-      nivel: nivel.value
+      classe: classe.value
     })
     }
   ).then(res => res.json())
-  .then(data => proficiencia.value = data);
+  .then(data => classe.value = data.classe)
+})
+
+nomeChar.addEventListener("change", async function(){
+  fetch(`http://localhost:8080/ficha/${id}`,
+    {
+      headers:
+      {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: "POST",
+    body: JSON.stringify({
+      nome: nomeChar.value
+    })
+    }
+  ).then(res => res.json())
+  .then(data => nomeChar.value = data.nome)
+})
+
+classeArmadura.addEventListener("change", async function(){
+  fetch(`http://localhost:8080/ficha/${id}`,
+    {
+      headers:
+      {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: "POST",
+    body: JSON.stringify({
+      classeArmadura: classeArmadura.value
+    })
+    }
+  ).then(res => res.json())
+  .then(data => classeArmadura.value = data.classeArmadura)
+})
+
+deslocamento.addEventListener("change", async function(){
+  fetch(`http://localhost:8080/ficha/${id}`,
+    {
+      headers:
+      {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: "POST",
+    body: JSON.stringify({
+      deslocamento: deslocamento.value
+    })
+    }
+  ).then(res => res.json())
+  .then(data => deslocamento.value = data.deslocamento)
+})
+
+nivel.addEventListener("change", async function(){
+  const response = await fetch(`http://localhost:8080/ficha/${id}`,
+    {
+      headers: {
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: "POST",
+    body: JSON.stringify({
+      level: nivel.value
+    })
+    }
+  )
+
+  if(response.ok){
+    const data = await response.json()
+    proficiencia.value = data.proficiencia;
+  }
 }
 )
 
@@ -253,36 +345,54 @@ botaoDelete.addEventListener("click", async function(){
     )
 })
 
-botaoFicha.addEventListener("click", async function(){
- const response = await fetch("http://localhost:8080/ficha", {
+hpAtual.addEventListener("change", async function(){
+  fetch(`http://localhost:8080/ficha/${id}`, {
     headers:
         {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    method: 'GET'
-  });
-  const data = await response.json();
-  console.log(data)
+    method: 'POST',
+    body: JSON.stringify({
+      vida: hpAtual.value
+    })
+  }).then(res => res.json)
+})
 
+document.addEventListener("DOMContentLoaded", async function(){
+ const response = await fetch(`http://localhost:8080/ficha/${id}`, {
+    headers:
+        {
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'GET'
+  })
+
+  data = await response.json(); 
+
+  nomeChar.value = `${JSON.stringify(data.nome)}`
+  classe.value = `${JSON.stringify(data.classe)}`
+  
   //atributos
-  dexAtributo.value = `${JSON.stringify(data[0].atributos.destreza)}`
-  forcaAtributo.value = `${JSON.stringify(data[0].atributos.forca)}`
-  consAtributo.value = `${JSON.stringify(data[0].atributos.constituicao)}`
-  carismaAtributo.value = `${JSON.stringify(data[0].atributos.carisma)}`
-  sabAtributo.value = `${JSON.stringify(data[0].atributos.sabedoria)}`
-  intAtributo.value = `${JSON.stringify(data[0].atributos.inteligencia)}`
-  dexMod.value = `${JSON.stringify(data[0].atributos.destrezaMod)}`
-  forcaMod.value = `${JSON.stringify(data[0].atributos.forcaMod)}`
-  consMod.value = `${JSON.stringify(data[0].atributos.constituicaoMod)}`
-  carismaMod.value = `${JSON.stringify(data[0].atributos.carismaMod)}`
-  sabMod.value = `${JSON.stringify(data[0].atributos.sabedoriaMod)}`
-  intMod.value = `${JSON.stringify(data[0].atributos.inteligenciaMod)}`
-  iniciativa.value = `${JSON.stringify(data[0].iniciativa)}`
+  dexAtributo.value = `${JSON.stringify(data.atributos.destreza)}`
+  forcaAtributo.value = `${JSON.stringify(data.atributos.forca)}`
+  consAtributo.value = `${JSON.stringify(data.atributos.constituicao)}`
+  carismaAtributo.value = `${JSON.stringify(data.atributos.carisma)}`
+  sabAtributo.value = `${JSON.stringify(data.atributos.sabedoria)}`
+  intAtributo.value = `${JSON.stringify(data.atributos.inteligencia)}`
+  dexMod.value = `${JSON.stringify(data.atributos.destrezaMod)}`
+  forcaMod.value = `${JSON.stringify(data.atributos.forcaMod)}`
+  consMod.value = `${JSON.stringify(data.atributos.constituicaoMod)}`
+  carismaMod.value = `${JSON.stringify(data.atributos.carismaMod)}`
+  sabMod.value = `${JSON.stringify(data.atributos.sabedoriaMod)}`
+  intMod.value = `${JSON.stringify(data.atributos.inteligenciaMod)}`
+  iniciativa.value = `${JSON.stringify(data.iniciativa)}`
 
   //pericias 
 
-  acrobacia.value = dexMod.value;
+
   arcanismo.value = intMod.value;
   atletismo.value = forcaMod.value;
   atuacao.value = carismaMod.value;
@@ -301,26 +411,156 @@ botaoFicha.addEventListener("click", async function(){
   religiao.value = intMod.value
   sobrevivencia.value = sabMod.value
 
+  //salva guardas
+  forcaSave.value = forcaMod.value
+  consSave.value = consMod.value
+  dexSave.value = dexMod.value
+  intSave.value = intMod.value
+  sabSave.value = sabMod.value
+  carismaSave.value = carismaMod.value
+
+  //HP
+  hpAtual.value = `${JSON.stringify(data.vida)}`
+  
+  //Nivel e proficiencia
+  nivel.value = `${JSON.stringify(data.level)}`
+  proficiencia.value = `${JSON.stringify(data.proficiencia)}`
 
 })
 
 
-forcaAtributo.addEventListener("change", function(){
-  fetch("http://localhost:8080/ficha/altera-valor", {
+forcaAtributo.addEventListener("change", async function(){
+  const response = await fetch(`http://localhost:8080/ficha/alteraForca/${id}`, {
       headers: {
+      'Authorization': `Bearer ${token}`,
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    method: "POST",
+    method: "PATCH",
     body: JSON.stringify({
-      nome: forcaAtributo.id,
-      valor: forcaAtributo.value
-      
+      atributos: {
+        forca: Number(forcaAtributo.value)
+      }
+    })
+    
+    }
+  )
+
+  const data = await response.json();
+  forcaAtributo.value = data.atributos.forca;
+  forcaMod.value = data.atributos.forcaMod
+  atletismo.value = data.atributos.forcaMod
+  forcaSave.value = forcaMod.value
+  
+}
+)
+
+dexAtributo.addEventListener("change", async function(){
+  const response = await fetch(`http://localhost:8080/ficha/alteraDex/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: "PATCH",
+    body: JSON.stringify({
+      atributos: {
+        destreza: Number(dexAtributo.value)
+      }
+    })
+    
+    }
+  )
+  
+  const data = await response.json();
+  dexAtributo.value = data.atributos.destreza;
+  dexMod.value = data.atributos.destrezaMod
+  acrobacia.value = data.pericias.find(p => p.nome === "Acrobacia").valor
+  dexSave.value = destrezaMod.value
+  
+}
+)
+
+consAtributo.addEventListener("change", function(){
+  fetch(`http://localhost:8080/ficha/alteraCons/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: "PATCH",
+    body: JSON.stringify({
+      atributos: {
+        constituicao: Number(consAtributo.value)
+      }
     })
     
     }
   ).then(res => res.json())
-  .then(data => forcaAtributo.value = data);
+  .then(data => data.atributos.constituicao);
+  
+}
+)
+
+intAtributo.addEventListener("change", function(){
+  fetch(`http://localhost:8080/ficha/alteraInteligencia/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: "PATCH",
+    body: JSON.stringify({
+      atributos: {
+        inteligencia: Number(intAtributo.value)
+      }
+    })
+    
+    }
+  ).then(res => res.json())
+  .then(data => data.atributos.inteligencia);
+  
+}
+)
+
+sabAtributo.addEventListener("change", function(){
+  fetch(`http://localhost:8080/ficha/alteraSab/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: "PATCH",
+    body: JSON.stringify({
+      atributos: {
+        sabedoria: Number(sabAtributo.value)
+      }
+    })
+    
+    }
+  ).then(res => res.json())
+  .then(data => data.atributos.sabedoria);
+  
+}
+)
+
+carismaAtributo.addEventListener("change", function(){
+  fetch(`http://localhost:8080/ficha/alteraCarisma/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: "PATCH",
+    body: JSON.stringify({
+      atributos: {
+        carisma: Number(carismaAtributo.value)
+      }
+    })
+    
+    }
+  ).then(res => res.json())
+  .then(data => data.atributos.carisma);
   
 }
 )
