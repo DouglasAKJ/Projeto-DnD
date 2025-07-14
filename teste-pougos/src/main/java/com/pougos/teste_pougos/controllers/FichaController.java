@@ -74,17 +74,25 @@ public class FichaController {
         fichaService.deletarFichas();
     }
 
+    @Transactional
     @PatchMapping("/alteraForca/{id}")
     public Ficha alteraForca(@AuthenticationPrincipal Usuario usuario, @RequestBody Ficha ficha,@PathVariable("id") Long id) throws InvocationTargetException, IllegalAccessException {
         Ficha fichaAtual = fichaService.buscaPorId(id);
         fichaAtual.getAtributos().setForca(ficha.getAtributos().getForca());
+        int mod = fichaAtual.getAtributos().getModificador(TipoAtributo.FORCA);
+        int bonusProf = fichaAtual.getProficiencia();
+
+        fichaAtual.getPericias().stream()
+                .filter(p -> p.getTipoAtributo() == TipoAtributo.FORCA)
+                .forEach(p -> p.calculaMod(mod, bonusProf));
+        fichaService.criaFicha(fichaAtual);
         //beanUtilsBean.copyProperties(fichaAtual, ficha);
         return fichaService.criaFicha(fichaAtual);
     }
 
     @Transactional
     @PatchMapping("/alteraDex/{id}")
-    public Ficha alteraDex(@AuthenticationPrincipal Usuario usuario,@RequestBody Ficha ficha,@PathVariable("id") Long id) throws InvocationTargetException, IllegalAccessException {
+    public ResponseEntity alteraDex(@AuthenticationPrincipal Usuario usuario,@RequestBody Ficha ficha,@PathVariable("id") Long id) throws InvocationTargetException, IllegalAccessException {
         Ficha fichaAtual = fichaService.buscaPorId(id);
         fichaAtual.getAtributos().setDestreza(ficha.getAtributos().getDestreza());
         int mod = fichaAtual.getAtributos().getModificador(TipoAtributo.DESTREZA);
@@ -93,42 +101,159 @@ public class FichaController {
         fichaAtual.getPericias().stream()
                 .filter(p -> p.getTipoAtributo() == TipoAtributo.DESTREZA)
                 .forEach(p -> p.calculaMod(mod, bonusProf));
+        fichaService.criaFicha(fichaAtual);
 
 
         //beanUtilsBean.copyProperties(fichaAtual, ficha);
-        return fichaService.criaFicha(fichaAtual);
+        return ResponseEntity.ok(fichaAtual);
     }
 
     @PatchMapping("/alteraCons/{id}")
-    public Ficha alteraCons(@AuthenticationPrincipal Usuario usuario, @RequestBody Ficha ficha,@PathVariable("id") Long id) throws InvocationTargetException, IllegalAccessException {
+    public ResponseEntity alteraCons(@AuthenticationPrincipal Usuario usuario, @RequestBody Ficha ficha,@PathVariable("id") Long id) throws InvocationTargetException, IllegalAccessException {
         Ficha fichaAtual = fichaService.buscaPorId(id);
         fichaAtual.getAtributos().setConstituicao(ficha.getAtributos().getConstituicao());
+        int mod = fichaAtual.getAtributos().getModificador(TipoAtributo.CONSTITUICAO);
+        int bonusProf = fichaAtual.getProficiencia();
+
+        fichaAtual.getPericias().stream()
+                .filter(p -> p.getTipoAtributo() == TipoAtributo.CONSTITUICAO)
+                .forEach(p -> p.calculaMod(mod, bonusProf));
         //beanUtilsBean.copyProperties(fichaAtual, ficha);
-        return fichaService.criaFicha(fichaAtual);
+        fichaService.criaFicha(fichaAtual);
+
+        return ResponseEntity.ok(fichaAtual);
     }
 
     @PatchMapping("/alteraInteligencia/{id}")
-    public Ficha alteraInteligencia(@AuthenticationPrincipal Usuario usuario, @RequestBody Ficha ficha,@PathVariable("id") Long id) throws InvocationTargetException, IllegalAccessException {
+    public ResponseEntity alteraInteligencia(@AuthenticationPrincipal Usuario usuario, @RequestBody Ficha ficha,@PathVariable("id") Long id) throws InvocationTargetException, IllegalAccessException {
         Ficha fichaAtual = fichaService.buscaPorId(id);
         fichaAtual.getAtributos().setInteligencia(ficha.getAtributos().getInteligencia());
+        int mod = fichaAtual.getAtributos().getModificador(TipoAtributo.INTELIGENCIA);
+        int bonusProf = fichaAtual.getProficiencia();
+
+        fichaAtual.getPericias().stream()
+                .filter(p -> p.getTipoAtributo() == TipoAtributo.INTELIGENCIA)
+                .forEach(p -> p.calculaMod(mod, bonusProf));
         //beanUtilsBean.copyProperties(fichaAtual, ficha);
-        return fichaService.criaFicha(fichaAtual);
+        fichaService.criaFicha(fichaAtual);
+
+        return ResponseEntity.ok(fichaAtual);
     }
 
     @PatchMapping("/alteraSab/{id}")
-    public Ficha alteraSab(@AuthenticationPrincipal Usuario usuario, @RequestBody Ficha ficha,@PathVariable("id") Long id) throws InvocationTargetException, IllegalAccessException {
+    public ResponseEntity alteraSab(@AuthenticationPrincipal Usuario usuario, @RequestBody Ficha ficha,@PathVariable("id") Long id) throws InvocationTargetException, IllegalAccessException {
         Ficha fichaAtual = fichaService.buscaPorId(id);
         fichaAtual.getAtributos().setSabedoria(ficha.getAtributos().getSabedoria());
+        int mod = fichaAtual.getAtributos().getModificador(TipoAtributo.SABEDORIA);
+        int bonusProf = fichaAtual.getProficiencia();
+
+        fichaAtual.getPericias().stream()
+                .filter(p -> p.getTipoAtributo() == TipoAtributo.SABEDORIA)
+                .forEach(p -> p.calculaMod(mod, bonusProf));
         //beanUtilsBean.copyProperties(fichaAtual, ficha);
-        return fichaService.criaFicha(fichaAtual);
+        fichaService.criaFicha(fichaAtual);
+
+        return ResponseEntity.ok(fichaAtual);
     }
 
     @PatchMapping("/alteraCarisma/{id}")
-    public Ficha alteraCarisma(@AuthenticationPrincipal Usuario usuario, @RequestBody Ficha ficha,@PathVariable("id") Long id) throws InvocationTargetException, IllegalAccessException {
+    public ResponseEntity alteraCarisma(@AuthenticationPrincipal Usuario usuario, @RequestBody Ficha ficha,@PathVariable("id") Long id) throws InvocationTargetException, IllegalAccessException {
         Ficha fichaAtual = fichaService.buscaPorId(id);
         fichaAtual.getAtributos().setCarisma(ficha.getAtributos().getCarisma());
+        int mod = fichaAtual.getAtributos().getModificador(TipoAtributo.CARISMA);
+        int bonusProf = fichaAtual.getProficiencia();
+
+        fichaAtual.getPericias().stream()
+                .filter(p -> p.getTipoAtributo() == TipoAtributo.CARISMA)
+                .forEach(p -> p.calculaMod(mod, bonusProf));
+
+        fichaService.criaFicha(fichaAtual);
         //beanUtilsBean.copyProperties(fichaAtual, ficha);
-        return fichaService.criaFicha(fichaAtual);
+        return ResponseEntity.ok(fichaAtual);
+    }
+
+    @PatchMapping("/profForca/{id}")
+    public ResponseEntity alteraProficienciaForca(@AuthenticationPrincipal Usuario usuario, @RequestBody Ficha ficha, @PathVariable Long id){
+        Ficha fichaAtual = fichaService.buscaPorId(id);
+        fichaAtual.getAtributos().setForcaProf(ficha.getAtributos().isForcaProf());
+        if (fichaAtual.getAtributos().isForcaProf()){
+            fichaAtual.getAtributos().setForcaSave(fichaAtual.getAtributos().getForcaMod(), fichaAtual.getProficiencia());
+        } else {
+            fichaAtual.getAtributos().setForcaSave(fichaAtual.getAtributos().getForcaMod(), 0);
+        }
+        fichaService.criaFicha(fichaAtual);
+
+        return ResponseEntity.ok(fichaAtual);
+    }
+
+    @PatchMapping("/profDestreza/{id}")
+    public ResponseEntity alteraProficienciaDestreza(@AuthenticationPrincipal Usuario usuario, @RequestBody Ficha ficha, @PathVariable Long id){
+        Ficha fichaAtual = fichaService.buscaPorId(id);
+        fichaAtual.getAtributos().setDestrezaProf((ficha.getAtributos().isDestrezaProf()));
+        if (fichaAtual.getAtributos().isDestrezaProf()){
+            fichaAtual.getAtributos().setDestrezaSave(fichaAtual.getAtributos().getDestrezaMod(), fichaAtual.getProficiencia());
+        } else {
+            fichaAtual.getAtributos().setDestrezaSave(fichaAtual.getAtributos().getDestrezaMod(), 0);
+        }
+        fichaService.criaFicha(fichaAtual);
+
+        return ResponseEntity.ok(fichaAtual);
+    }
+
+    @PatchMapping("/profCons/{id}")
+    public ResponseEntity alteraProficienciaCons(@AuthenticationPrincipal Usuario usuario, @RequestBody Ficha ficha, @PathVariable Long id){
+        Ficha fichaAtual = fichaService.buscaPorId(id);
+        fichaAtual.getAtributos().setConstituicaoProf(ficha.getAtributos().isConstituicaoProf());
+        if (fichaAtual.getAtributos().isConstituicaoProf()){
+            fichaAtual.getAtributos().setConstituicaoSave(fichaAtual.getAtributos().getConstituicaoMod(), fichaAtual.getProficiencia());
+        } else {
+            fichaAtual.getAtributos().setConstituicaoSave(fichaAtual.getAtributos().getConstituicaoMod(), 0);
+        }
+        fichaService.criaFicha(fichaAtual);
+
+        return ResponseEntity.ok(fichaAtual);
+    }
+
+    @PatchMapping("/profCarisma/{id}")
+    public ResponseEntity alteraProficienciaCarisma(@AuthenticationPrincipal Usuario usuario, @RequestBody Ficha ficha, @PathVariable Long id){
+        Ficha fichaAtual = fichaService.buscaPorId(id);
+        fichaAtual.getAtributos().setCarismaProf(ficha.getAtributos().isCarismaProf());
+        if (fichaAtual.getAtributos().isCarismaProf()){
+            fichaAtual.getAtributos().setCarismaSave(fichaAtual.getAtributos().getCarismaMod(), fichaAtual.getProficiencia());
+        } else {
+            fichaAtual.getAtributos().setCarismaSave(fichaAtual.getAtributos().getCarismaMod(), 0);
+        }
+        fichaService.criaFicha(fichaAtual);
+
+        return ResponseEntity.ok(fichaAtual);
+    }
+
+    @PatchMapping("/profInteligencia/{id}")
+    public ResponseEntity alteraProficienciaInteligencia(@AuthenticationPrincipal Usuario usuario, @RequestBody Ficha ficha, @PathVariable Long id){
+        Ficha fichaAtual = fichaService.buscaPorId(id);
+        fichaAtual.getAtributos().setInteligenciaProf(ficha.getAtributos().isInteligenciaProf());
+        if (fichaAtual.getAtributos().isInteligenciaProf()){
+            fichaAtual.getAtributos().setInteligenciaSave(fichaAtual.getAtributos().getInteligenciaMod(), fichaAtual.getProficiencia());
+        } else {
+            fichaAtual.getAtributos().setInteligenciaSave(fichaAtual.getAtributos().getInteligenciaMod(), 0);
+        }
+        fichaService.criaFicha(fichaAtual);
+
+        return ResponseEntity.ok(fichaAtual);
+    }
+
+    @PatchMapping("/profSabedoria/{id}")
+    public ResponseEntity alteraProficienciaSabedoria(@AuthenticationPrincipal Usuario usuario, @RequestBody Ficha ficha, @PathVariable Long id){
+        Ficha fichaAtual = fichaService.buscaPorId(id);
+        fichaAtual.getAtributos().setSabedoriaProf(ficha.getAtributos().isSabedoriaProf());
+        if (fichaAtual.getAtributos().isSabedoriaProf()){
+            fichaAtual.getAtributos().setSabedoriaSave(fichaAtual.getAtributos().getSabedoriaMod(), fichaAtual.getProficiencia());
+        } else {
+            fichaAtual.getAtributos().setSabedoriaSave(fichaAtual.getAtributos().getSabedoriaMod(), 0);
+        }
+        fichaService.criaFicha(fichaAtual);
+
+        return ResponseEntity.ok(fichaAtual);
     }
 
 

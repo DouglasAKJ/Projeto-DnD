@@ -45,7 +45,7 @@ public class Ficha {
 
         this.atributos = new Atributos();
         this.usuario = usuario;
-        this.pericias.add(new Pericia("Acrobacia", TipoAtributo.INTELIGENCIA, this));
+        this.pericias.add(new Pericia("Acrobacia", TipoAtributo.DESTREZA, this));
         this.pericias.add(new Pericia("Arcanismo", TipoAtributo.INTELIGENCIA, this));
         this.pericias.add(new Pericia("Atletismo", TipoAtributo.FORCA, this));
         this.pericias.add(new Pericia("Atuação", TipoAtributo.CARISMA, this));

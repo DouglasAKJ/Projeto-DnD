@@ -94,6 +94,14 @@ const intSave = document.getElementById("intSave");
 const sabSave = document.getElementById("sabSave");
 const carismaSave = document.getElementById("carismaSave");
 
+//check prof salva guarda
+const forcaCheck = document.getElementById("forcaCheck")
+const dexCheck = document.getElementById("dexCheck")
+const consCheck = document.getElementById("consCheck")
+const intCheck = document.getElementById("intCheck")
+const sabCheck = document.getElementById("sabCheck")
+const carCheck = document.getElementById("carCheck")  
+
 //hp
 const hpAtual = document.getElementById("hpAtual") 
 const hpMax = document.getElementById("hpMax")
@@ -232,11 +240,234 @@ const hpMax = document.getElementById("hpMax")
     navInv.style.display = "flex";
   })
 
+forcaCheck.addEventListener("change", async function(){
+  if(this.checked){
+    const response = await fetch(`http://localhost:8080/ficha/profForca/${id}`, {
+      headers:{
+      'Authorization': `Bearer ${token}`, 
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      method: 'PATCH',
+      body: JSON.stringify({
+        atributos: {
+          forcaProf: true
+        }
+      })
+    })
+    const data = await response.json();
+    forcaSave.value = data.atributos.forcaSave;
+  } else {
+    const response = await fetch(`http://localhost:8080/ficha/profForca/${id}`, {
+      headers:{
+      'Authorization': `Bearer ${token}`, 
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      method: 'PATCH',
+      body: JSON.stringify({
+        atributos: {
+          forcaProf: false
+        }
+      })
+    })
+
+    const data = await response.json() 
+    forcaSave.value = data.atributos.forcaSave
+  }
+})
+
+dexCheck.addEventListener("change", async function(){
+  if(this.checked){
+    const response = await fetch(`http://localhost:8080/ficha/profDestreza/${id}`, {
+      headers:{
+      'Authorization': `Bearer ${token}`, 
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      method: 'PATCH',
+      body: JSON.stringify({
+        atributos: {
+          destrezaProf: true
+        }
+      })
+    })
+    const data = await response.json();
+    dexSave.value = data.atributos.destrezaSave;
+  } else {
+    const response = await fetch(`http://localhost:8080/ficha/profDestreza/${id}`, {
+      headers:{
+      'Authorization': `Bearer ${token}`, 
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      method: 'PATCH',
+      body: JSON.stringify({
+        atributos: {
+          destrezaProf: false
+        }
+      })
+    })
+
+    const data = await response.json() 
+    dexSave.value = data.atributos.destrezaSave
+  }
+})
+
+intCheck.addEventListener("change", async function(){
+  if(this.checked){
+    const response = await fetch(`http://localhost:8080/ficha/profInteligencia/${id}`, {
+      headers:{
+      'Authorization': `Bearer ${token}`, 
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      method: 'PATCH',
+      body: JSON.stringify({
+        atributos: {
+          inteligenciaProf: true
+        }
+      })
+    })
+    const data = await response.json();
+    intSave.value = data.atributos.inteligenciaSave;
+  } else {
+    const response = await fetch(`http://localhost:8080/ficha/profInteligencia/${id}`, {
+      headers:{
+      'Authorization': `Bearer ${token}`, 
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      method: 'PATCH',
+      body: JSON.stringify({
+        atributos: {
+          inteligenciaProf: false
+        }
+      })
+    })
+
+    const data = await response.json() 
+    intSave.value = data.atributos.inteligenciaSave
+  }
+})
+
+consCheck.addEventListener("change", async function(){
+  if(this.checked){
+    const response = await fetch(`http://localhost:8080/ficha/profCons/${id}`, {
+      headers:{
+      'Authorization': `Bearer ${token}`, 
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      method: 'PATCH',
+      body: JSON.stringify({
+        atributos: {
+          constituicaoProf: true
+        }
+      })
+    })
+    const data = await response.json();
+    consSave.value = data.atributos.constituicaoSave;
+  } else {
+    const response = await fetch(`http://localhost:8080/ficha/profCons/${id}`, {
+      headers:{
+      'Authorization': `Bearer ${token}`, 
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      method: 'PATCH',
+      body: JSON.stringify({
+        atributos: {
+          constituicaoProf: false
+        }
+      })
+    })
+
+    const data = await response.json() 
+    consSave.value = data.atributos.constituicaoSave
+  }
+})
+
+sabCheck.addEventListener("change", async function(){
+  if(this.checked){
+    const response = await fetch(`http://localhost:8080/ficha/profSabedoria/${id}`, {
+      headers:{
+      'Authorization': `Bearer ${token}`, 
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      method: 'PATCH',
+      body: JSON.stringify({
+        atributos: {
+          sabedoriaProf: true
+        }
+      })
+    })
+    const data = await response.json();
+    sabSave.value = data.atributos.sabedoriaSave;
+  } else {
+    const response = await fetch(`http://localhost:8080/ficha/profSabedoria/${id}`, {
+      headers:{
+      'Authorization': `Bearer ${token}`, 
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      method: 'PATCH',
+      body: JSON.stringify({
+        atributos: {
+          sabedoriaProf: false
+        }
+      })
+    })
+
+    const data = await response.json() 
+    sabSave.value = data.atributos.sabedoriaSave
+  }
+})
+
+carCheck.addEventListener("change", async function(){
+  if(this.checked){
+    const response = await fetch(`http://localhost:8080/ficha/profCarisma/${id}`, {
+      headers:{
+      'Authorization': `Bearer ${token}`, 
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      method: 'PATCH',
+      body: JSON.stringify({
+        atributos: {
+          carismaProf: true
+        }
+      })
+    })
+    const data = await response.json();
+    carismaSave.value = data.atributos.carismaSave;
+  } else {
+    const response = await fetch(`http://localhost:8080/ficha/profCarisma/${id}`, {
+      headers:{
+      'Authorization': `Bearer ${token}`, 
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      method: 'PATCH',
+      body: JSON.stringify({
+        atributos: {
+          carismaProf: false
+        }
+      })
+    })
+
+    const data = await response.json() 
+    carismaSave.value = data.atributos.carismaSave
+  }
+})
+
 classe.addEventListener("change", async function(){
   fetch(`http://localhost:8080/ficha/${id}`,
     {
       headers:
       {
+      'Authorization': `Bearer ${token}`,
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
@@ -318,6 +549,12 @@ nivel.addEventListener("change", async function(){
   if(response.ok){
     const data = await response.json()
     proficiencia.value = data.proficiencia;
+  forcaSave.value = data.atributos.forcaSave
+  consSave.value = data.atributos.constituicaoSave
+  dexSave.value = data.atributos.destrezaSave
+  intSave.value = data.atributos.inteligenciaSave
+  sabSave.value = data.atributos.sabedoriaSave
+  carismaSave.value = data.atributos.carismaSave
   }
 }
 )
@@ -392,32 +629,40 @@ document.addEventListener("DOMContentLoaded", async function(){
 
   //pericias 
 
-
-  arcanismo.value = intMod.value;
-  atletismo.value = forcaMod.value;
-  atuacao.value = carismaMod.value;
-  engancao.value = carismaMod.value
-  furtividade.value = carismaMod.value;
-  historia.value = intMod.value;
-  intimidacao.value = carismaMod.value
-  intuicao.value = sabMod.value
-  investigacao.value = intMod.value
-  lidarAnimais.value = sabMod.value
-  medicina.value = intMod.value
-  natureza.value = intMod.value
-  percepcao.value = sabMod.value
-  persuasao.value = carismaMod.value
-  prestidigitacao.value = dexMod.value
-  religiao.value = intMod.value
-  sobrevivencia.value = sabMod.value
+  acrobacia.value = `${JSON.stringify(data.pericias.find(p => p.nome === "Acrobacia").valor)}`
+  arcanismo.value = `${JSON.stringify(data.pericias.find(p => p.nome === "Arcanismo").valor)}`
+  atletismo.value = `${JSON.stringify(data.pericias.find(p => p.nome === "Atletismo").valor)}`
+  atuacao.value = `${JSON.stringify(data.pericias.find(p => p.nome === "Atuação").valor)}`
+  engancao.value = `${JSON.stringify(data.pericias.find(p => p.nome === "Enganação").valor)}`
+  furtividade.value = `${JSON.stringify(data.pericias.find(p => p.nome === "Furtividade").valor)}`
+  historia.value = `${JSON.stringify(data.pericias.find(p => p.nome === "História").valor)}`
+  intimidacao.value = `${JSON.stringify(data.pericias.find(p => p.nome === "Intimidação").valor)}`
+  intuicao.value = `${JSON.stringify(data.pericias.find(p => p.nome === "Intuição").valor)}`
+  investigacao.value = `${JSON.stringify(data.pericias.find(p => p.nome === "Investigação").valor)}`
+  lidarAnimais.value = `${JSON.stringify(data.pericias.find(p => p.nome === "Lidar com Animais").valor)}`
+  medicina.value = `${JSON.stringify(data.pericias.find(p => p.nome === "Medicina").valor)}`
+  natureza.value = `${JSON.stringify(data.pericias.find(p => p.nome === "Natureza").valor)}`
+  percepcao.value = `${JSON.stringify(data.pericias.find(p => p.nome === "Percepção").valor)}`
+  persuasao.value = `${JSON.stringify(data.pericias.find(p => p.nome === "Persuasão").valor)}`
+  prestidigitacao.value = `${JSON.stringify(data.pericias.find(p => p.nome === "Prestidigição").valor)}`
+  religiao.value = `${JSON.stringify(data.pericias.find(p => p.nome === "Religião").valor)}`
+  sobrevivencia.value = `${JSON.stringify(data.pericias.find(p => p.nome === "Sobrevivência").valor)}`
 
   //salva guardas
-  forcaSave.value = forcaMod.value
-  consSave.value = consMod.value
-  dexSave.value = dexMod.value
-  intSave.value = intMod.value
-  sabSave.value = sabMod.value
-  carismaSave.value = carismaMod.value
+  forcaSave.value = data.atributos.forcaSave
+  consSave.value = data.atributos.constituicaoSave
+  dexSave.value = data.atributos.destrezaSave
+  intSave.value = data.atributos.inteligenciaSave
+  sabSave.value = data.atributos.sabedoriaSave
+  carismaSave.value = data.atributos.carismaSave
+
+  //prof salva guarda
+  forcaCheck.checked = data.atributos.forcaProf ? true : false;
+  dexCheck.checked = data.atributos.destrezaProf ? true : false;
+  intCheck.checked = data.atributos.inteligenciaProf ? true : false;
+  consCheck.checked = data.atributos.constituicaoProf ? true : false;
+  sabCheck.checked = data.atributos.sabedoriaProf ? true : false;
+  carCheck.checked = data.atributos.carismaProf ? true : false;
 
   //HP
   hpAtual.value = `${JSON.stringify(data.vida)}`
@@ -446,10 +691,10 @@ forcaAtributo.addEventListener("change", async function(){
     }
   )
 
-  const data = await response.json();
+    const data = await response.json();
   forcaAtributo.value = data.atributos.forca;
   forcaMod.value = data.atributos.forcaMod
-  atletismo.value = data.atributos.forcaMod
+  atletismo.value = data.pericias.find(p => p.nome === "Atletismo").valor
   forcaSave.value = forcaMod.value
   
 }
@@ -473,16 +718,19 @@ dexAtributo.addEventListener("change", async function(){
   )
   
   const data = await response.json();
+  iniciativa.value = data.atributos.destrezaMod
   dexAtributo.value = data.atributos.destreza;
   dexMod.value = data.atributos.destrezaMod
   acrobacia.value = data.pericias.find(p => p.nome === "Acrobacia").valor
+  furtividade.value = data.pericias.find(p => p.nome === "Furtividade").valor
+  prestidigitacao.value = data.pericias.find(p => p.nome === "Prestidigição").valor
   dexSave.value = destrezaMod.value
   
 }
 )
 
-consAtributo.addEventListener("change", function(){
-  fetch(`http://localhost:8080/ficha/alteraCons/${id}`, {
+consAtributo.addEventListener("change", async function(){
+ const response = await fetch(`http://localhost:8080/ficha/alteraCons/${id}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
       'Accept': 'application/json',
@@ -496,14 +744,18 @@ consAtributo.addEventListener("change", function(){
     })
     
     }
-  ).then(res => res.json())
-  .then(data => data.atributos.constituicao);
+  )
+
+  const data = await response.json();
+  consAtributo.value = data.atributos.constituicao;
+  consMod.value = data.atributos.constituicaoMod
+  consSave.value = constituicaoMod.value
   
 }
 )
 
-intAtributo.addEventListener("change", function(){
-  fetch(`http://localhost:8080/ficha/alteraInteligencia/${id}`, {
+intAtributo.addEventListener("change", async function(){
+  const response = await fetch(`http://localhost:8080/ficha/alteraInteligencia/${id}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
       'Accept': 'application/json',
@@ -517,14 +769,23 @@ intAtributo.addEventListener("change", function(){
     })
     
     }
-  ).then(res => res.json())
-  .then(data => data.atributos.inteligencia);
+  )
+
+    const data = await response.json();
+  intAtributo.value = data.atributos.inteligencia;
+  intMod.value = data.atributos.inteligenciaMod
+  intSave.value = inteligenciaMod.value
+  arcanismo.value =  data.pericias.find(p => p.nome === "Arcanismo").valor
+  historia.value =  data.pericias.find(p => p.nome === "História").valor
+  investigacao.value =  data.pericias.find(p => p.nome === "Investigação").valor
+  natureza.value =  data.pericias.find(p => p.nome === "Natureza").valor
+  religiao.value =  data.pericias.find(p => p.nome === "Religião").valor
   
 }
 )
 
-sabAtributo.addEventListener("change", function(){
-  fetch(`http://localhost:8080/ficha/alteraSab/${id}`, {
+sabAtributo.addEventListener("change", async function(){
+ const response = await fetch(`http://localhost:8080/ficha/alteraSab/${id}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
       'Accept': 'application/json',
@@ -538,14 +799,22 @@ sabAtributo.addEventListener("change", function(){
     })
     
     }
-  ).then(res => res.json())
-  .then(data => data.atributos.sabedoria);
+  )
+      const data = await response.json();
+  sabAtributo.value = data.atributos.sabedoria;
+  sabMod.value = data.atributos.sabedoriaMod
+  sabSave.value = sabedoriaMod.value
+  intuicao.value =  data.pericias.find(p => p.nome === "Intuição").valor
+  lidarAnimais.value =  data.pericias.find(p => p.nome === "Lidar com Animais").valor
+  medicina.value =  data.pericias.find(p => p.nome === "Medicina").valor
+  percepcao.value =  data.pericias.find(p => p.nome === "Percepção").valor
+  sobrevivencia.value =  data.pericias.find(p => p.nome === "Sobrevivência").valor
   
 }
 )
 
-carismaAtributo.addEventListener("change", function(){
-  fetch(`http://localhost:8080/ficha/alteraCarisma/${id}`, {
+carismaAtributo.addEventListener("change", async function(){
+ const response = await fetch(`http://localhost:8080/ficha/alteraCarisma/${id}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
       'Accept': 'application/json',
@@ -559,8 +828,17 @@ carismaAtributo.addEventListener("change", function(){
     })
     
     }
-  ).then(res => res.json())
-  .then(data => data.atributos.carisma);
+  )
+      const data = await response.json();
+  carismaAtributo.value = data.atributos.carisma;
+  carismaMod.value = data.atributos.carismaMod
+  carismaSave.value = carismaMod.value
+  atuacao.value =  data.pericias.find(p => p.nome === "Arcanismo").valor
+  engancao.value =  data.pericias.find(p => p.nome === "Enganação").valor
+  intimidacao.value =  data.pericias.find(p => p.nome === "Intimidação").valor
+  persuasao.value =  data.pericias.find(p => p.nome === "Persuasão").valor
+  persuasao.value =  data.pericias.find(p => p.nome === "Persuasão").valor
+
   
 }
 )
