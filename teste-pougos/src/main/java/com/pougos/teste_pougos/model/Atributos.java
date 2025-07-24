@@ -352,6 +352,8 @@ public class Atributos {
     }
 
 
+
+
     //
 //    private Long id;
 //    private EnumMap<TipoAtributo, Integer> valores;

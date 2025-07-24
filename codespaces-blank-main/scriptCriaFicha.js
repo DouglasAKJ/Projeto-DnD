@@ -4,10 +4,19 @@ const adicionaFicha = document.getElementById("adicionaFicha")
 const criaFicha = document.getElementById("criaFichas")
 const enviaFicha = document.getElementById("enviaFichaButton")
 const formFicha = document.getElementById("form-ficha")
+const sair = document.getElementById("sair")
 
+
+sair.addEventListener("click", function(){
+    window.location.href = "loginUsuario.html";
+    sessionStorage.removeItem("auth-token")
+})
 
 
 document.addEventListener("DOMContentLoaded", async function(){
+    if (!token){
+        window.location.href = "loginUsuario.html"
+    }
     const response = await fetch("http://localhost:8080/usuarios/returnUsuario", {
         headers: {
             'Authorization': `Bearer ${token}`,

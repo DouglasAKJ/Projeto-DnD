@@ -1,9 +1,6 @@
 package com.pougos.teste_pougos.dto;
 
-import com.pougos.teste_pougos.model.Atributos;
-import com.pougos.teste_pougos.model.Ficha;
-import com.pougos.teste_pougos.model.Pericia;
-import com.pougos.teste_pougos.model.Usuario;
+import com.pougos.teste_pougos.model.*;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -20,9 +17,17 @@ public class FichaDTO {
     private int iniciativa;
     private int deslocamento;
     private int vida;
+    private int vidaMax;
     private int vidaTemp;
+    private int cdMagia;
+    private String idiomas;
+    private String aparencia;
+    private String caracteristicas;
+    private String background;
     private UsuarioDTO usuario;
     private List<Pericia> pericias;
+    private List<Ataque> ataques;
+    private List<Spell> spells;
 
     public FichaDTO() {
     }
@@ -39,11 +44,83 @@ public class FichaDTO {
         this.iniciativa = ficha.getIniciativa();
         this.deslocamento = ficha.getDeslocamento();
         this.vida = ficha.getVida();
+        this.cdMagia = ficha.getCdMagia();
         this.vidaTemp = ficha.getVidaTemp();
+        this.vidaMax = ficha.getVidaMax();
+        this.background = ficha.getBackgrounds();
+        this.aparencia = ficha.getAparencia();
+        this.idiomas = ficha.getIdiomas();
+        this.caracteristicas = ficha.getCaracteristicas();
+
         this.usuario = new UsuarioDTO(ficha.getUsuario());
         this.pericias = ficha.getPericias();
+        this.ataques = ficha.getAtaques();
+        this.spells = ficha.getSpells();
     }
 
+    public String getIdiomas() {
+        return idiomas;
+    }
+
+    public void setIdiomas(String idiomas) {
+        this.idiomas = idiomas;
+    }
+
+    public String getAparencia() {
+        return aparencia;
+    }
+
+    public void setAparencia(String aparencia) {
+        this.aparencia = aparencia;
+    }
+
+    public String getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public void setCaracteristicas(String caracteristicas) {
+        this.caracteristicas = caracteristicas;
+    }
+
+    public String getBackground() {
+        return background;
+    }
+
+    public void setBackground(String background) {
+        this.background = background;
+    }
+
+    public int getVidaMax() {
+        return vidaMax;
+    }
+
+    public int getCdMagia() {
+        return cdMagia;
+    }
+
+    public void setCdMagia(int cdMagia) {
+        this.cdMagia = cdMagia;
+    }
+
+    public void setVidaMax(int vidaMax) {
+        this.vidaMax = vidaMax;
+    }
+
+    public List<Spell> getSpells() {
+        return spells;
+    }
+
+    public void setSpells(List<Spell> spells) {
+        this.spells = spells;
+    }
+
+    public List<Ataque> getAtaques() {
+        return ataques;
+    }
+
+    public void setAtaques(List<Ataque> ataques) {
+        this.ataques = ataques;
+    }
 
     public UsuarioDTO getUsuario() {
         return usuario;

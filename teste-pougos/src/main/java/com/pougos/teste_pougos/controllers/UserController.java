@@ -43,7 +43,7 @@ public class UserController {
     @GetMapping("/returnUsuario")
     public ResponseEntity retornaUsuarioLogado(@AuthenticationPrincipal Usuario usuario){
 
-        return ResponseEntity.ok(usuario.getNome());
+        return ResponseEntity.ok(usuario);
     }
 
     @GetMapping("/returnFichas")

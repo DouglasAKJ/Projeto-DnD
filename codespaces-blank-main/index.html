@@ -5,19 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teste</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
 </head>
 <body>
+    <button id="voltar">Voltar</button>
     <div class="centralizar coluna">
     <h1>Ficha Dungeons & Dragons</h1>
-    <form action="" method="post">
-        <button type="button" id="botao"> Criar Ficha (teste) </button>
-    </form>
-    <form action="" method="get">
-        <button type="button" id="botaoFicha"> Visualizar Ficha (teste) </button>
-    </form>
-    <form action="" method="post">
-        <button type="button" id="botaoDelete"> Deletar Todas Fichas (teste) </button>
-    </form>
     <pre id="content"></pre>
     <main class="">
         <h3 class="centralizar">Atributos</h3>
@@ -214,38 +209,24 @@
                     <input type="number" name="hpTemp" id="hpTemp" class="input ">
                     <br>
                     <div class="linha">
-                    <input type="button" value="Dano">
-                    <input type="number" name="vida" id="vida" class="input input-grande">
-                    <input type="button" value="Cura">
+                    <button type="button" id="dano">Dano</button>
+                    <input type="number" name="vidaAltera" id="vidaAltera" class="input input-grande">
+                    <button type="button" id="cura">Cura</button>
                     </div>
                     </div>
                 </div>
                 <div class="linha" style="justify-content: space-around; margin: 10px;">
                     <button type="button" id="combat-btn">Combate</button>
                     <button type="button" id="spell-btn">Magias</button>
-                    <button type="button" id="about-btn">Sobre</button>
                     <button type="button" id="inv-btn">Inventário</button>
                 </div>
                 <div id="nav-ataque2">
                     <div id="nav-ataque">
                         <p>Ataque</p>
                         <div class="linha">
-                        <input type="text" name="ataque1" id="ataque1" placeholder="nome">
-                        <input type="text" name="ataque1" id="ataque1" placeholder="bonus" style="width: 40px;" >
-                        <input type="text" name="ataque1" id="ataque1" placeholder="dano" style="width: 100px;">
-                        </div>
-                        <div class="linha">
-                        <input type="text" name="ataque1" id="ataque1" placeholder="nome">
-                        <input type="text" name="ataque1" id="ataque1" placeholder="bonus" style="width: 40px;" >
-                        <input type="text" name="ataque1" id="ataque1" placeholder="dano" style="width: 100px;">
-                        </div>
-                        <div class="linha">
-                        <input type="text" name="ataque1" id="ataque1" placeholder="nome">
-                        <input type="text" name="ataque1" id="ataque1" placeholder="bonus" style="width: 40px;" >
-                        <input type="text" name="ataque1" id="ataque1" placeholder="dano" style="width: 100px;">
                         </div>
                     </div>
-                    <button type="button" id="add-botao">+</button>
+                    <button type="button" id="add-botao" onclick="addAtaque()">+</button>
                 </div>
 
                 <div id="nav-inventario" class="centralizar">
@@ -254,57 +235,108 @@
 
                 <div id="nav-spells">
                     <p>Spells</p>
+                    <label for="cdMagia">CD: </label>
+                    <input type="number" id="cdMagia" name="cdMagia">
                     <div>
                         <h4>Truques</h4>
+                        
                         <div id="truques">
-        
+
                         </div>
-                        <button type="button" class="add-spell" onclick="adicionarCantrip()">+</button>
+
+                        <button type="button" class="add-spell" onclick="abrirModal(0)">+</button>
+
+                        <div id="modal" class="modal">
+                            <div class="modal-content">
+                            <span class="fechar" onclick="fecharModal()">&times;</span>
+                            <h2>Selecionar Spell</h2>
+                            
+                           <form id="formTruque">
+                            
+                                <select name="selectSpell" id="selectSpell">
+                                    <option value="">-- Selecione um spell -- </option>
+                                </select>
+                            
+                                <label for="castingTime">Casting Time:</label>
+                                <input type="text" name="castingTime" id="castingTime">
+                            
+                                <label for="range">Range:</label>
+                                <input type="text" name="range" id="range">
+                            
+                                <label for="desc">Descrição:</label>
+                                <textarea type="text" name="desc" id="desc" rows="14" cols="45"></textarea>
+
+                                <input type="number" id="levelSpell" name="levelSpell" style="display: none;">
+                                
+
+                            <button type="button" onclick="salvarCantrip()">Salvar</button>
+                            </form>
+                            </div>
+                        </div>
+
                     </div>
                     <div>
                         <h4>Nivel 1</h4>
-                        <div id="level1"></div>
-                        <button type="button" onclick="adicionarSpellLvl1()">+</button>
+                        <div id="level1">
+
+                        </div>
+                        <button type="button" class="add-spell" onclick="abrirModal(1)">+</button>
                     </div>
                     <div>
                         <h4>Nivel 2</h4>
-                        <div id="level2"></div>
-                        <button type="button" onclick="adicionarSpellLvl2()">+</button>
+                        <div id="level2">
+
+                        </div>
+                        <button type="button" onclick="abrirModal(2)">+</button>
                     </div>
                     <div>
                         <h4>Nivel 3</h4>
-                        <div id="level3"></div>
-                        <button type="button" onclick="adicionarSpellLvl3()">+</button>
+                        <div id="level3">
+
+                        </div>
+                        <button type="button" onclick="abrirModal(3)">+</button>
                     </div>
                     <div>
                         <h4>Nivel 4</h4>
-                        <div id="level4"></div>
-                        <button type="button" onclick="adicionarSpellLvl4()">+</button>
+                        <div id="level4">
+
+                        </div>
+                        <button type="button" onclick="abrirModal(4)">+</button>
                     </div>
                     <div>
                         <h4>Nivel 5</h4>
-                        <div id="level5"></div>
-                        <button type="button" onclick="adicionarSpellLvl5()">+</button>
+                        <div id="level5">
+
+                        </div>
+                        <button type="button" onclick="abrirModal(5)">+</button>
                     </div>
                     <div>
                         <h4>Nivel 6</h4>
-                        <div id="level6"></div>
-                        <button type="button" onclick="adicionarSpellLvl6()">+</button>
+                        <div id="level6">
+
+                        </div>
+                        <button type="button" onclick="abrirModal(6)">+</button>
                     </div>
                     <div>
                         <h4>Nivel 7</h4>
-                        <div id="level7"></div>
-                        <button type="button" onclick="adicionarSpellLvl7()">+</button>
+                        <div id="level7">
+
+                        </div>
+                        <button type="button" onclick="abrirModal(7)">+</button>
                     </div>
                     <div>
                         <h4>Nivel 8</h4>
-                        <div id="level8"></div>
-                        <button type="button" onclick="adicionarSpellLvl8()">+</button>
+                        <div id="level8">
+
+                        </div>
+                        <button type="button" onclick="abrirModal(8)">+</button>
                     </div>
                     <div>
                         <h4>Nivel 9</h4>
-                        <div id="level9"></div>
-                        <button type="button" onclick="adicionarSpellLvl9()">+</button>
+                        <div id="level9">
+                            
+                        </div>
+                        <button type="button" onclick="abrirModal(9)">+</button>
                     </div>
                     
                 </div>
@@ -315,6 +347,7 @@
         <div>
             <div class="linha" style="margin-left: 5px;">
             <p>Nome do jogador: </p>
+            <strong><p id="nomePlayer" style="font-size: 17px; margin-left: 5px;"></p></strong>
             </div>
             <div class="linha" style="margin-left: 5px;">
             <label for="nomeChar">Nome do personagem:</label>
@@ -325,6 +358,10 @@
             <input type="text" name="classe" id="classe" style="width: 100px; height: 15px;">
             </div>
             <div class="linha" style="margin-left: 5px; margin-top: 15px;">
+                <label for="raca">Raça:</label>
+                <input type="text" name="raca" id="raca" style="width: 100px; height: 15px;">
+            </div>
+            <div class="linha" style="margin-left: 5px; margin-top: 15px;">
                 <label for="nivel">Level: </label>
                 <input type="number" name="nivel" id="nivel" style="width: 30px;">
                 <label for="proficiencia" style="margin-left: 10px;">Proficiência: </label>
@@ -332,10 +369,10 @@
             </div>
             
         </div>
-        <textarea rows="6" cols="50" name="ideais" id="ideais"></textarea>
-        <textarea rows="6" cols="50" name="vinculos" id="vinculos"></textarea>
-        <textarea rows="6" cols="50" name="fraquzas" id="fraquezas"></textarea>
-        <textarea rows="20" cols="50" name="caracteristicas" id="caracteristicas"></textarea>
+        <textarea rows="6" cols="50" name="ideais" id="ideais" placeholder="Aparência..."></textarea>
+        <textarea rows="6" cols="50" name="vinculos" id="vinculos" placeholder="Proficiencias e idiomas..."></textarea>
+        <textarea rows="6" cols="50" name="fraquzas" id="fraquezas" placeholder="Backgrounds e Lore..."></textarea>
+        <textarea rows="20" cols="50" name="caracteristicas" id="caracteristicas" placeholder="Caracteristícas e Talentos..."></textarea>
         </div>
     </div>
 </div>

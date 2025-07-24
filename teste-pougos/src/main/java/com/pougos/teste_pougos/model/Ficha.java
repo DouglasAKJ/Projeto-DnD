@@ -33,7 +33,23 @@ public class Ficha {
     @Column(nullable = true)
     private int vida;
     @Column(nullable = true)
+    private int vidaMax;
+    @Column(nullable = true)
     private int vidaTemp;
+    @Column(nullable = true)
+    private int cdMagia;
+    @Column(nullable = true)
+    private String aparencia = "Aparência...";
+    @Column(nullable = true)
+    private String backgrounds = "Background...";
+    @Column(nullable = true)
+    private String caracteristicas = "Características...";
+    @Column(nullable = true)
+    private String idiomas = "Idiomas...";
+    @OneToMany(mappedBy = "ficha", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ataque> ataques;
+    @OneToMany(mappedBy = "ficha", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Spell> spells = new ArrayList<>();
 
     @ManyToOne
     private Usuario usuario;
@@ -56,15 +72,128 @@ public class Ficha {
         this.pericias.add(new Pericia("Intuição", TipoAtributo.SABEDORIA, this));
         this.pericias.add(new Pericia("Investigação", TipoAtributo.INTELIGENCIA, this));
         this.pericias.add(new Pericia("Lidar com Animais", TipoAtributo.SABEDORIA, this));
-        this.pericias.add(new Pericia("Medicina", TipoAtributo.SABEDORIA, this));
+        this.pericias.add(new Pericia("Medicina", TipoAtributo.INTELIGENCIA, this));
         this.pericias.add(new Pericia("Natureza", TipoAtributo.INTELIGENCIA, this));
         this.pericias.add(new Pericia("Percepção", TipoAtributo.SABEDORIA, this));
         this.pericias.add(new Pericia("Persuasão", TipoAtributo.CARISMA, this));
         this.pericias.add(new Pericia("Prestidigição", TipoAtributo.DESTREZA, this));
         this.pericias.add(new Pericia("Religião", TipoAtributo.INTELIGENCIA, this));
         this.pericias.add(new Pericia("Sobrevivência", TipoAtributo.SABEDORIA, this));
+        this.ataques = new ArrayList<>();
 
 
+    }
+
+    public String getAparencia() {
+        return aparencia;
+    }
+
+    public void setAparencia(String aparencia) {
+        this.aparencia = aparencia;
+    }
+
+    public String getBackgrounds() {
+        return backgrounds;
+    }
+
+    public void setBackgrounds(String backgrounds) {
+        this.backgrounds = backgrounds;
+    }
+
+    public String getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public void setCaracteristicas(String caracteristicas) {
+        this.caracteristicas = caracteristicas;
+    }
+
+    public String getIdiomas() {
+        return idiomas;
+    }
+
+    public void setIdiomas(String idiomas) {
+        this.idiomas = idiomas;
+    }
+
+    public int getCdMagia() {
+        return cdMagia;
+    }
+
+    public void setCdMagia(int cdMagia) {
+        this.cdMagia = cdMagia;
+    }
+
+    public int getVidaMax() {
+        return vidaMax;
+    }
+
+    public void setVidaMax(int vidaMax) {
+        this.vidaMax = vidaMax;
+    }
+
+    public List<Ataque> getAtaques() {
+        return ataques;
+    }
+
+    public void setAtaques(List<Ataque> ataques) {
+        this.ataques = ataques;
+    }
+
+    public List<Spell> getSpells() {
+        return spells;
+    }
+
+    public void setSpells(List<Spell> spells) {
+        this.spells = spells;
+    }
+
+    public void addAtaque(String nome, String bonus, String dano){
+        Ataque novoAtaque = new Ataque(nome, bonus, dano);
+        novoAtaque.setFicha(this);
+        ataques.add(novoAtaque);
+
+    }
+
+    public void deletaAtaque(String nome, String bonus, String dano){
+        Ataque ataqueParaRemover = null;
+        for (Ataque a: ataques){
+            if(a.getNome().equalsIgnoreCase(nome) &&
+            a.getBonus().equalsIgnoreCase(bonus) &&
+            a.getDano().equalsIgnoreCase(dano)){
+                ataqueParaRemover = a;
+                break;
+            }
+        }
+        if (ataqueParaRemover != null){
+            ataques.remove(ataqueParaRemover);
+            ataqueParaRemover.setFicha(null);
+        }
+    }
+
+    public void addSpell(String nome, String desc, String time ,String range, int nivel){
+        Spell novoSpell = new Spell(nome, desc, time, range, nivel);
+        novoSpell.setFicha(this);
+        spells.add(novoSpell);
+    }
+
+    public void deleteSpell(String nome, String desc, String time, String range, int nivel){
+        Spell spellParaRemover = null;
+        for (Spell s : spells) {
+            if (s.getNome().equals(nome) &&
+                    s.getDesc().equals(desc) &&
+                    s.getTime().equals(time) &&
+                    s.getRange().equals(range) &&
+                    s.getNivel() == nivel) {
+                spellParaRemover = s;
+                break;
+            }
+        }
+
+        if (spellParaRemover != null) {
+            spells.remove(spellParaRemover);
+            spellParaRemover.setFicha(null); // importante para relacionamento JPA
+        }
     }
 
     public List<Pericia> getPericias() {
