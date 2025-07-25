@@ -13,7 +13,7 @@ public class Spell {
 
     @Lob
     @Column
-    private String desc;
+    private String descricao;
     private String time;
     private String range;
 
@@ -31,7 +31,7 @@ public class Spell {
 
     public Spell(String nome, String desc, String time, String range, int nivel) {
         this.nome = nome;
-        this.desc = desc;
+        this.descricao = desc;
         this.time = time;
         this.range = range;
         this.nivel = nivel;
@@ -40,7 +40,7 @@ public class Spell {
     public Spell(int nivel, String nome, String desc, String range) {
         this.nivel = nivel;
         this.nome = nome;
-        this.desc = desc;
+        this.descricao = desc;
         this.range = range;
     }
 
@@ -72,11 +72,11 @@ public class Spell {
     }
 
     public String getDesc() {
-        return desc;
+        return descricao;
     }
 
     public void setDesc(String desc) {
-        this.desc = desc;
+        this.descricao = desc;
     }
 
     public String getTime() {
