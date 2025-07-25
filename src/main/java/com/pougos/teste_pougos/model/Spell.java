@@ -11,7 +11,7 @@ public class Spell {
     private int nivel;
     private String nome;
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String descricao;
     private String time;
     private String range;
