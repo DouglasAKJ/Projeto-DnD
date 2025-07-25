@@ -49,7 +49,7 @@ public class Ficha {
     @OneToMany(mappedBy = "ficha", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ataque> ataques;
     @OneToMany(mappedBy = "ficha", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Spell> spells = new ArrayList<>();
+    private List<Spell> spells;
 
     @ManyToOne
     private Usuario usuario;
@@ -80,6 +80,7 @@ public class Ficha {
         this.pericias.add(new Pericia("Religião", TipoAtributo.INTELIGENCIA, this));
         this.pericias.add(new Pericia("Sobrevivência", TipoAtributo.SABEDORIA, this));
         this.ataques = new ArrayList<>();
+        this.spells = new ArrayList<>();
 
 
     }
