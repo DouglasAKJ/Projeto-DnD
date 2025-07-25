@@ -11,7 +11,6 @@ public class Spell {
     private int nivel;
     private String nome;
 
-    @Lob
     @Column
     private String descricao;
     private String time;
