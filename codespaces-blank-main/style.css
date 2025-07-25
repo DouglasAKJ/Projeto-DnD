@@ -126,6 +126,10 @@ input[type="number"]::-webkit-outer-spin-button {
     color: #4a3a2d;
 }
 
+.input-spell{
+    color: #4a3a2d;
+}
+
 .input-grande {
     font-size: 36px; /* Ajuste para o tamanho da fonte grande */
     padding: 10px 5px; /* Mais padding para inputs grandes */
