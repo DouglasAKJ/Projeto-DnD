@@ -45,7 +45,7 @@ public class IniciativaController {
         return ResponseEntity.ok(iniciativaService.listaIniciativa());
     }
 
-    @PostMapping("/deletaIniciativa")
+    @PostMapping("/deletaIniciativa/{id}")
     public ResponseEntity deletaAlguemIniciativa(@PathVariable Long id){
         Iniciativa iniciativa = iniciativaService.buscaPorId(id);
         iniciativaService.deletaIniciativaID(iniciativa.getId());
