@@ -44,4 +44,11 @@ public class IniciativaController {
         iniciativaService.apagaIniciativa();
         return ResponseEntity.ok(iniciativaService.listaIniciativa());
     }
+
+    @PostMapping("/deletaIniciativa")
+    public ResponseEntity deletaAlguemIniciativa(@PathVariable Long id){
+        Iniciativa iniciativa = iniciativaService.buscaPorId(id);
+        iniciativaService.deletaIniciativaID(iniciativa.getId());
+        return ResponseEntity.ok(iniciativaService.listaIniciativa());
+    }
 }

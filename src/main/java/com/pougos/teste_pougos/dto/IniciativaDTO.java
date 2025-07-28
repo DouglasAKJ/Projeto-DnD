@@ -1,4 +1,4 @@
 package com.pougos.teste_pougos.dto;
 
-public record IniciativaDTO(int hp) {
+public record IniciativaDTO(Long id,int hp) {
 }

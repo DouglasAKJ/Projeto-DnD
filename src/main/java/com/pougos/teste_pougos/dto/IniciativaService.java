@@ -26,4 +26,8 @@ public class IniciativaService {
                 iniciativaRepository.deleteAll();
         }
 
+        public void deletaIniciativaID(Long id){
+                iniciativaRepository.deleteById(id);
+        }
+
 }
