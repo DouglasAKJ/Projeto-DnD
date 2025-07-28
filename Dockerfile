@@ -1,16 +1,19 @@
-FROM ubuntu:latest AS build
+FROM maven:3.8.4-jdk-8 as build
 
-RUN apt-get update
-RUN apt-get install openjdk-17-jdk -y
-COPY . .
+COPY src /app/src
+COPY pom.xml /app
 
-RUN apt-get install maven -y
-RUN mvn clean install 
+WORKDIR /app
+RUN mvn clean install
 
-FROM openjdk:17-jdk-slim
+FROM openjdk:8-jre-alpine
+
+
+COPY --from=build /app/target/teste-pougos-0.0.1-SNAPSHOT.jar app.jar
+
+WORKDIR /app
 
 EXPOSE 8080
 
-COPY --from=build /target/teste-pougos-0.0.1-SNAPSHOT.jar app.jar
+CMD ["java", "-jar", "app.jar"]
 
-ENTRYPOINT [ "java", "-jar", "app.jar" ]
