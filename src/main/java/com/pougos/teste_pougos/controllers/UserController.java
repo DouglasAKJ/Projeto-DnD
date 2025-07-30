@@ -52,4 +52,10 @@ public class UserController {
         return ResponseEntity.ok(fichas);
     }
 
+    @PostMapping("/deletaFicha")
+    public ResponseEntity deletaFicha(@AuthenticationPrincipal Usuario usuario, @RequestBody Ficha ficha){
+        fichaRepository.delete(ficha);
+        List<Ficha> fichas = fichaRepository.findByUsuario(usuario);
+        return ResponseEntity.ok(fichas);
+    }
 }
