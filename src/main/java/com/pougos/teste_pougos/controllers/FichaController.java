@@ -621,7 +621,7 @@ public class FichaController {
         return ResponseEntity.ok(fichaAtual);
     }
 
-    @PostMapping("/acrobaciaExp/{id}")
+    @PatchMapping("/acrobaciaExp/{id}")
     public ResponseEntity alteraExpertiseAcrobacia(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
         Ficha ficha = fichaService.buscaPorId(id);
         Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Acrobacia")).findFirst().get();
@@ -636,7 +636,7 @@ public class FichaController {
         return ResponseEntity.ok(ficha);
     }
 
-    @PostMapping("/arcanismoExp/{id}")
+    @PatchMapping("/arcanismoExp/{id}")
     public ResponseEntity alteraExpertiseArcanismo(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
         Ficha ficha = fichaService.buscaPorId(id);
         Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Arcanismo")).findFirst().get();
@@ -651,7 +651,7 @@ public class FichaController {
         return ResponseEntity.ok(ficha);
     }
 
-    @PostMapping("/atletismoExp/{id}")
+    @PatchMapping("/atletismoExp/{id}")
     public ResponseEntity alteraExpertiseAtletismo(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
         Ficha ficha = fichaService.buscaPorId(id);
         Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Atletismo")).findFirst().get();
@@ -666,7 +666,7 @@ public class FichaController {
         return ResponseEntity.ok(ficha);
     }
 
-    @PostMapping("/atuacaoExp/{id}")
+    @PatchMapping("/atuacaoExp/{id}")
     public ResponseEntity alteraExpertiseAtuacao(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
         Ficha ficha = fichaService.buscaPorId(id);
         Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Atuação")).findFirst().get();
@@ -681,7 +681,7 @@ public class FichaController {
         return ResponseEntity.ok(ficha);
     }
 
-    @PostMapping("/enganacaoExp/{id}")
+    @PatchMapping("/enganacaoExp/{id}")
     public ResponseEntity alteraExpertiseEnganacao(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
         Ficha ficha = fichaService.buscaPorId(id);
         Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Enganação")).findFirst().get();
@@ -696,7 +696,7 @@ public class FichaController {
         return ResponseEntity.ok(ficha);
     }
 
-    @PostMapping("/furtividadeExp/{id}")
+    @PatchMapping("/furtividadeExp/{id}")
     public ResponseEntity alteraExpertiseFurtividade(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
         Ficha ficha = fichaService.buscaPorId(id);
         Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Furtividade")).findFirst().get();
@@ -711,7 +711,7 @@ public class FichaController {
         return ResponseEntity.ok(ficha);
     }
 
-    @PostMapping("/historiaExp/{id}")
+    @PatchMapping("/historiaExp/{id}")
     public ResponseEntity alteraExpertiseHistoria(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
         Ficha ficha = fichaService.buscaPorId(id);
         Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("História")).findFirst().get();
@@ -726,7 +726,7 @@ public class FichaController {
         return ResponseEntity.ok(ficha);
     }
 
-    @PostMapping("/intimidacaoExp/{id}")
+    @PatchMapping("/intimidacaoExp/{id}")
     public ResponseEntity alteraExpertiseIntimidacao(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
         Ficha ficha = fichaService.buscaPorId(id);
         Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Intimidação")).findFirst().get();
@@ -741,7 +741,7 @@ public class FichaController {
         return ResponseEntity.ok(ficha);
     }
 
-    @PostMapping("/intuicaoExp/{id}")
+    @PatchMapping("/intuicaoExp/{id}")
     public ResponseEntity alteraExpertiseIntuicao(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
         Ficha ficha = fichaService.buscaPorId(id);
         Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Intuição")).findFirst().get();
@@ -756,7 +756,7 @@ public class FichaController {
         return ResponseEntity.ok(ficha);
     }
 
-    @PostMapping("/investigacaoExp/{id}")
+    @PatchMapping("/investigacaoExp/{id}")
     public ResponseEntity alteraExpertiseInvestigacao(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
         Ficha ficha = fichaService.buscaPorId(id);
         Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Investigação")).findFirst().get();
@@ -771,7 +771,7 @@ public class FichaController {
         return ResponseEntity.ok(ficha);
     }
 
-    @PostMapping("/lidaranimaisExp/{id}")
+    @PatchMapping("/lidaranimaisExp/{id}")
     public ResponseEntity alteraExpertiseLidarAnimais(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
         Ficha ficha = fichaService.buscaPorId(id);
         Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Lidar com Animais")).findFirst().get();
@@ -786,7 +786,7 @@ public class FichaController {
         return ResponseEntity.ok(ficha);
     }
 
-    @PostMapping("/medicinaExp/{id}")
+    @PatchMapping("/medicinaExp/{id}")
     public ResponseEntity alteraExpertiseMedicina(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
         Ficha ficha = fichaService.buscaPorId(id);
         Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Medicina")).findFirst().get();
@@ -801,7 +801,7 @@ public class FichaController {
         return ResponseEntity.ok(ficha);
     }
 
-    @PostMapping("/naturezaExp/{id}")
+    @PatchMapping("/naturezaExp/{id}")
     public ResponseEntity alteraExpertiseNatureza(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
         Ficha ficha = fichaService.buscaPorId(id);
         Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Natureza")).findFirst().get();
@@ -816,7 +816,7 @@ public class FichaController {
         return ResponseEntity.ok(ficha);
     }
 
-    @PostMapping("/percepcaoExp/{id}")
+    @PatchMapping("/percepcaoExp/{id}")
     public ResponseEntity alteraExpertisePercepcao(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
         Ficha ficha = fichaService.buscaPorId(id);
         Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Percepção")).findFirst().get();
@@ -831,7 +831,7 @@ public class FichaController {
         return ResponseEntity.ok(ficha);
     }
 
-    @PostMapping("/persuasaoExp/{id}")
+    @PatchMapping("/persuasaoExp/{id}")
     public ResponseEntity alteraExpertisePersuasao(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
         Ficha ficha = fichaService.buscaPorId(id);
         Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Persuasão")).findFirst().get();
@@ -846,7 +846,7 @@ public class FichaController {
         return ResponseEntity.ok(ficha);
     }
 
-    @PostMapping("/prestidigitacaoExp/{id}")
+    @PatchMapping("/prestidigitacaoExp/{id}")
     public ResponseEntity alteraExpertisePrestidigitacao(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
         Ficha ficha = fichaService.buscaPorId(id);
         Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Prestidigitação")).findFirst().get();
@@ -861,7 +861,7 @@ public class FichaController {
         return ResponseEntity.ok(ficha);
     }
 
-    @PostMapping("/religiaoExp/{id}")
+    @PatchMapping("/religiaoExp/{id}")
     public ResponseEntity alteraExpertiseReligiao(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
         Ficha ficha = fichaService.buscaPorId(id);
         Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Religião")).findFirst().get();
@@ -876,7 +876,7 @@ public class FichaController {
         return ResponseEntity.ok(ficha);
     }
 
-    @PostMapping("/sobrevivenciaExp/{id}")
+    @PatchMapping("/sobrevivenciaExp/{id}")
     public ResponseEntity alteraExpertiseSobrevivencia(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
         Ficha ficha = fichaService.buscaPorId(id);
         Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Sobrevivência")).findFirst().get();
