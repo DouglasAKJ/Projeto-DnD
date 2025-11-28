@@ -17,6 +17,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 @RestController
+@CrossOrigin("http://127.0.0.1:5500")
 @RequestMapping("/ficha")
 public class FichaController {
     private final FichaService fichaService;
