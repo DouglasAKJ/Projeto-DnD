@@ -42,6 +42,10 @@ public class FichaService {
         return fichaRepository.findById(id).orElseThrow(() -> new RuntimeException("ID não encontrado"));
     }
 
+    public void deletaFicha(Ficha ficha){
+        fichaRepository.delete(ficha);
+    }
+
 
 }
 

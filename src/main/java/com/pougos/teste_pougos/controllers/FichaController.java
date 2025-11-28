@@ -373,6 +373,9 @@ public class FichaController {
         return ResponseEntity.ok(new FichaDTO(ficha));
     }
 
+
+
+
     @PostMapping("/adicionaAtaque/{id}")
     public ResponseEntity addAtaque(@AuthenticationPrincipal Usuario usuario,@RequestBody AtaqueDTO ataque ,@PathVariable Long id){
         Ficha fichaAtual = fichaService.buscaPorId(id);
@@ -617,6 +620,294 @@ public class FichaController {
         fichaService.criaFicha(fichaAtual);
 
         return ResponseEntity.ok(fichaAtual);
+    }
+
+    @PatchMapping("/acrobaciaExp/{id}")
+    public ResponseEntity alteraExpertiseAcrobacia(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
+        Ficha ficha = fichaService.buscaPorId(id);
+        Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Acrobacia")).findFirst().get();
+        pericia.setExpertise(expertise);
+        if(expertise){
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.DESTREZA), ficha.getProficiencia() * 2);
+        } else {
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.DESTREZA), ficha.getProficiencia());
+        }
+
+        fichaService.criaFicha(ficha);
+
+        return ResponseEntity.ok(ficha);
+    }
+
+    @PatchMapping("/arcanismoExp/{id}")
+    public ResponseEntity alteraExpertiseArcanismo(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
+        Ficha ficha = fichaService.buscaPorId(id);
+        Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Arcanismo")).findFirst().get();
+        pericia.setExpertise(expertise);
+        if(expertise){
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.INTELIGENCIA), ficha.getProficiencia() * 2);
+        } else {
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.INTELIGENCIA), ficha.getProficiencia());
+        }
+
+        fichaService.criaFicha(ficha);
+
+        return ResponseEntity.ok(ficha);
+    }
+
+    @PatchMapping("/atletismoExp/{id}")
+    public ResponseEntity alteraExpertiseAtletismo(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
+        Ficha ficha = fichaService.buscaPorId(id);
+        Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Atletismo")).findFirst().get();
+        pericia.setExpertise(expertise);
+        if(expertise){
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.FORCA), ficha.getProficiencia() * 2);
+        } else {
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.FORCA), ficha.getProficiencia());
+        }
+
+        fichaService.criaFicha(ficha);
+
+        return ResponseEntity.ok(ficha);
+    }
+
+    @PatchMapping("/atuacaoExp/{id}")
+    public ResponseEntity alteraExpertiseAtuacao(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
+        Ficha ficha = fichaService.buscaPorId(id);
+        Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Atuação")).findFirst().get();
+        pericia.setExpertise(expertise);
+        if(expertise){
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.CARISMA), ficha.getProficiencia() * 2);
+        } else {
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.CARISMA), ficha.getProficiencia());
+        }
+
+        fichaService.criaFicha(ficha);
+
+        return ResponseEntity.ok(ficha);
+    }
+
+    @PatchMapping("/enganacaoExp/{id}")
+    public ResponseEntity alteraExpertiseEnganacao(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
+        Ficha ficha = fichaService.buscaPorId(id);
+        Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Enganação")).findFirst().get();
+        pericia.setExpertise(expertise);
+        if(expertise){
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.CARISMA), ficha.getProficiencia() * 2);
+        } else {
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.CARISMA), ficha.getProficiencia());
+        }
+
+        fichaService.criaFicha(ficha);
+
+        return ResponseEntity.ok(ficha);
+    }
+
+    @PatchMapping("/furtividadeExp/{id}")
+    public ResponseEntity alteraExpertiseFurtividade(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
+        Ficha ficha = fichaService.buscaPorId(id);
+        Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Furtividade")).findFirst().get();
+        pericia.setExpertise(expertise);
+        if(expertise){
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.DESTREZA), ficha.getProficiencia() * 2);
+        } else {
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.DESTREZA), ficha.getProficiencia());
+        }
+
+        fichaService.criaFicha(ficha);
+
+        return ResponseEntity.ok(ficha);
+    }
+
+    @PatchMapping("/historiaExp/{id}")
+    public ResponseEntity alteraExpertiseHistoria(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
+        Ficha ficha = fichaService.buscaPorId(id);
+        Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("História")).findFirst().get();
+        pericia.setExpertise(expertise);
+        if(expertise){
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.INTELIGENCIA), ficha.getProficiencia() * 2);
+        } else {
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.INTELIGENCIA), ficha.getProficiencia());
+        }
+
+        fichaService.criaFicha(ficha);
+
+        return ResponseEntity.ok(ficha);
+    }
+
+    @PatchMapping("/intimidacaoExp/{id}")
+    public ResponseEntity alteraExpertiseIntimidacao(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
+        Ficha ficha = fichaService.buscaPorId(id);
+        Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Intimidação")).findFirst().get();
+        pericia.setExpertise(expertise);
+        if(expertise){
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.CARISMA), ficha.getProficiencia() * 2);
+        } else {
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.CARISMA), ficha.getProficiencia());
+        }
+
+        fichaService.criaFicha(ficha);
+
+        return ResponseEntity.ok(ficha);
+    }
+
+    @PatchMapping("/intuicaoExp/{id}")
+    public ResponseEntity alteraExpertiseIntuicao(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
+        Ficha ficha = fichaService.buscaPorId(id);
+        Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Intuição")).findFirst().get();
+        pericia.setExpertise(expertise);
+        if(expertise){
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.SABEDORIA), ficha.getProficiencia() * 2);
+        } else {
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.SABEDORIA), ficha.getProficiencia());
+        }
+
+        fichaService.criaFicha(ficha);
+
+        return ResponseEntity.ok(ficha);
+    }
+
+    @PatchMapping("/investigacaoExp/{id}")
+    public ResponseEntity alteraExpertiseInvestigacao(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
+        Ficha ficha = fichaService.buscaPorId(id);
+        Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Investigação")).findFirst().get();
+        pericia.setExpertise(expertise);
+        if(expertise){
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.INTELIGENCIA), ficha.getProficiencia() * 2);
+        } else {
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.INTELIGENCIA), ficha.getProficiencia());
+        }
+
+        fichaService.criaFicha(ficha);
+
+        return ResponseEntity.ok(ficha);
+    }
+
+    @PatchMapping("/lidaranimaisExp/{id}")
+    public ResponseEntity alteraExpertiseLidarAnimais(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
+        Ficha ficha = fichaService.buscaPorId(id);
+        Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Lidar com Animais")).findFirst().get();
+        pericia.setExpertise(expertise);
+        if(expertise){
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.SABEDORIA), ficha.getProficiencia() * 2);
+        } else {
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.SABEDORIA), ficha.getProficiencia());
+        }
+
+        fichaService.criaFicha(ficha);
+
+        return ResponseEntity.ok(ficha);
+    }
+
+    @PatchMapping("/medicinaExp/{id}")
+    public ResponseEntity alteraExpertiseMedicina(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
+        Ficha ficha = fichaService.buscaPorId(id);
+        Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Medicina")).findFirst().get();
+        pericia.setExpertise(expertise);
+        if(expertise){
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.SABEDORIA), ficha.getProficiencia() * 2);
+        } else {
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.SABEDORIA), ficha.getProficiencia());
+        }
+
+        fichaService.criaFicha(ficha);
+
+        return ResponseEntity.ok(ficha);
+    }
+
+    @PatchMapping("/naturezaExp/{id}")
+    public ResponseEntity alteraExpertiseNatureza(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
+        Ficha ficha = fichaService.buscaPorId(id);
+        Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Natureza")).findFirst().get();
+        pericia.setExpertise(expertise);
+        if(expertise){
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.INTELIGENCIA), ficha.getProficiencia() * 2);
+        } else {
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.INTELIGENCIA), ficha.getProficiencia());
+        }
+
+        fichaService.criaFicha(ficha);
+
+        return ResponseEntity.ok(ficha);
+    }
+
+    @PatchMapping("/percepcaoExp/{id}")
+    public ResponseEntity alteraExpertisePercepcao(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
+        Ficha ficha = fichaService.buscaPorId(id);
+        Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Percepção")).findFirst().get();
+        pericia.setExpertise(expertise);
+        if(expertise){
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.SABEDORIA), ficha.getProficiencia() * 2);
+        } else {
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.SABEDORIA), ficha.getProficiencia());
+        }
+
+        fichaService.criaFicha(ficha);
+
+        return ResponseEntity.ok(ficha);
+    }
+
+    @PatchMapping("/persuasaoExp/{id}")
+    public ResponseEntity alteraExpertisePersuasao(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
+        Ficha ficha = fichaService.buscaPorId(id);
+        Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Persuasão")).findFirst().get();
+        pericia.setExpertise(expertise);
+        if(expertise){
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.CARISMA), ficha.getProficiencia() * 2);
+        } else {
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.CARISMA), ficha.getProficiencia());
+        }
+
+        fichaService.criaFicha(ficha);
+
+        return ResponseEntity.ok(ficha);
+    }
+
+    @PatchMapping("/prestidigitacaoExp/{id}")
+    public ResponseEntity alteraExpertisePrestidigitacao(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
+        Ficha ficha = fichaService.buscaPorId(id);
+        Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Prestidigitação")).findFirst().get();
+        pericia.setExpertise(expertise);
+        if(expertise){
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.DESTREZA), ficha.getProficiencia() * 2);
+        } else {
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.DESTREZA), ficha.getProficiencia());
+        }
+
+        fichaService.criaFicha(ficha);
+
+        return ResponseEntity.ok(ficha);
+    }
+
+    @PatchMapping("/religiaoExp/{id}")
+    public ResponseEntity alteraExpertiseReligiao(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
+        Ficha ficha = fichaService.buscaPorId(id);
+        Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Religião")).findFirst().get();
+        pericia.setExpertise(expertise);
+        if(expertise){
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.INTELIGENCIA), ficha.getProficiencia() * 2);
+        } else {
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.INTELIGENCIA), ficha.getProficiencia());
+        }
+
+        fichaService.criaFicha(ficha);
+
+        return ResponseEntity.ok(ficha);
+    }
+
+    @PatchMapping("/sobrevivenciaExp/{id}")
+    public ResponseEntity alteraExpertiseSobrevivencia(@AuthenticationPrincipal Usuario usuario, @RequestBody Boolean expertise, @PathVariable Long id){
+        Ficha ficha = fichaService.buscaPorId(id);
+        Pericia pericia = ficha.getPericias().stream().filter(p -> p.getNome().equalsIgnoreCase("Sobrevivência")).findFirst().get();
+        pericia.setExpertise(expertise);
+        if(expertise){
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.SABEDORIA), ficha.getProficiencia() * 2);
+        } else {
+            pericia.calculaMod(ficha.getAtributos().getModificador(TipoAtributo.SABEDORIA), ficha.getProficiencia());
+        }
+
+        fichaService.criaFicha(ficha);
+
+        return ResponseEntity.ok(ficha);
     }
 
     @PatchMapping("/profAcrobacia/{id}")

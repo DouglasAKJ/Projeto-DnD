@@ -12,6 +12,7 @@ public class Pericia {
     private Long id;
     private String nome;
     private boolean isProficiente;
+    private boolean isExpertise;
     @Column
     private int valor;
 
@@ -36,6 +37,13 @@ public class Pericia {
         }
     }
 
+    public boolean isExpertise() {
+        return isExpertise;
+    }
+
+    public void setExpertise(boolean expertise) {
+        isExpertise = expertise;
+    }
 
     public Ficha getFicha() {
         return ficha;

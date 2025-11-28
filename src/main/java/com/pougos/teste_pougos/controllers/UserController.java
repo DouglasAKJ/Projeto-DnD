@@ -1,10 +1,7 @@
 package com.pougos.teste_pougos.controllers;
 
 
-import com.pougos.teste_pougos.dto.LoginRequestDTO;
-import com.pougos.teste_pougos.dto.RegisterDTO;
-import com.pougos.teste_pougos.dto.ResponseDTO;
-import com.pougos.teste_pougos.dto.UserService;
+import com.pougos.teste_pougos.dto.*;
 import com.pougos.teste_pougos.helper.NullCopyProperties;
 import com.pougos.teste_pougos.infra.security.TokenService;
 import com.pougos.teste_pougos.model.Ficha;
@@ -25,10 +22,12 @@ import java.util.Optional;
 public class UserController {
     private final UserService userService;
     private final FichaRepository fichaRepository;
+    private final FichaService fichaService;
 
-    public UserController(UserService userService, FichaRepository fichaRepository) {
+    public UserController(UserService userService, FichaRepository fichaRepository, FichaService fichaService) {
         this.userService = userService;
         this.fichaRepository = fichaRepository;
+        this.fichaService = fichaService;
     }
 
     @GetMapping
@@ -53,4 +52,11 @@ public class UserController {
         return ResponseEntity.ok(fichas);
     }
 
+    @PostMapping("/deletaFicha")
+    public ResponseEntity deletaFicha(@AuthenticationPrincipal Usuario usuario, @RequestBody FichaDTO fichaDTO){
+        Ficha ficha = fichaService.buscaPorId(fichaDTO.getId());
+        fichaRepository.delete(ficha);
+        List<Ficha> fichas = fichaRepository.findByUsuario(usuario);
+        return ResponseEntity.ok(fichas);
+    }
 }

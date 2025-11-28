@@ -1,9 +1,8 @@
 package com.pougos.teste_pougos.model;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Embeddable;
 
-import java.util.EnumMap;
 @Embeddable
 public class Atributos {
 
@@ -352,73 +351,4 @@ public class Atributos {
     }
 
 
-
-
-    //
-//    private Long id;
-//    private EnumMap<TipoAtributo, Integer> valores;
-//    private EnumMap<TipoAtributo, Integer> modificadores;
-//
-//    public EnumMap<TipoAtributo, Integer> getModificadores() {
-//        return modificadores;
-//    }
-//
-//    public void setModificadores(EnumMap<TipoAtributo, Integer> modificadores) {
-//        this.modificadores = modificadores;
-//    }
-//
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-//
-//    public EnumMap<TipoAtributo, Integer> getValores() {
-//        return valores;
-//    }
-//
-//    public void setValores(EnumMap<TipoAtributo, Integer> valores) {
-//        this.valores = valores;
-//    }
-//
-//    public Atributos() {
-//        valores = new EnumMap<>(TipoAtributo.class);
-//        modificadores = new EnumMap<>(TipoAtributo.class);
-//        // Inicializa todos com 10 como padrão (modificador +0)
-//        for (TipoAtributo tipo : TipoAtributo.values()) {
-//            valores.put(tipo, 10);
-//            modificadores.put(tipo, 0);
-//
-//        }
-//    }
-//
-//    public void setValor(TipoAtributo tipo, int valor){
-//        valores.put(tipo, valor);
-//        setModificador(tipo, valor);
-//    }
-//
-//    public int getValor(TipoAtributo tipo){
-//        return valores.getOrDefault(tipo, 10);
-//    }
-//
-//    public void setModificador(TipoAtributo tipo, int valor){
-//        modificadores.put(tipo, (valor-10) / 2);
-//    }
-//
-//    public int getModificador(TipoAtributo tipo){
-//        return modificadores.getOrDefault(tipo, 0);
-//    }
-//
-//
-//
-//
-//    public void imprimirAtributos() {
-//        for (TipoAtributo tipo : TipoAtributo.values()) {
-//            int valor = getValor(tipo);
-//            int mod = getModificador(tipo);
-//            System.out.printf("%s: %d (mod %+d)%n", tipo.name(), valor, mod);
-//        }
-//    }
 }
